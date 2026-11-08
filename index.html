@@ -1,0 +1,1565 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bidyard | Job Bidding Marketplace</title>
+<meta name="description" content="Bidyard is a job bidding marketplace web app. Clients post jobs and compare bids, service providers find work, send bids and manage finances, team and portfolio.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="apple-touch-icon" href="assets/logo/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Bidyard | Job Bidding Marketplace">
+<meta property="og:description" content="Clients post jobs. Pros send bids. A web app UI/UX prototype for a two-sided service marketplace.">
+<meta property="og:image" content="https://YOUR-USERNAME.github.io/bidyard/assets/og-image.png">
+<meta property="og:url" content="https://YOUR-USERNAME.github.io/bidyard/">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%201024%201024%22%20aria-hidden%3D%22true%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22bylg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%233B97FF%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%230062E0%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%221024%22%20height%3D%221024%22%20rx%3D%22230%22%20fill%3D%22url%28%23bylg%29%22/%3E%3Cg%20transform%3D%22translate%28-32%20-4%29%22%20fill%3D%22%23fff%22%3E%3Cpath%20d%3D%22M328%20276%20A56%2056%200%200%201%20440%20276%20L440%20600%20L328%20600%20Z%20M328%20600%20L440%20600%20L440%20800%20L384%20800%20A56%2056%200%200%201%20328%20744%20Z%22/%3E%3Cpath%20fill-rule%3D%22evenodd%22%20d%3D%22M560%20400%20A200%20200%200%200%201%20760%20600%20L760%20772%20Q760%20800%20732%20800%20L384%20800%20L384%20600%20L360%20600%20A200%20200%200%200%201%20560%20400%20Z%20M560%20506%20A94%2094%200%201%200%20560%20694%20A94%2094%200%201%200%20560%20506%20Z%22/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --ink:#1D1D1F; --muted:#6E6E73; --border:#E5E5EA; --hair:#D2D2D7; --ground:#F5F5F7; --surface:#fff;
+  --primary:#0071E3; --primary-d:#0062C4; --primary-s:#E8F1FD;
+  --amber:#A35200; --amber-s:#FFF2E0; --red:#D70015; --red-s:#FDECEE;
+  --blue:#0066CC; --blue-s:#E8F1FD; --gray:#515154; --gray-s:#F2F2F4;
+  --green:#1E7F38; --green-s:#E4F6E9;
+  --star:#FF9F0A;
+  --g-sun:linear-gradient(180deg,#FFD60A,#FF9F0A);
+  --g-grape:linear-gradient(180deg,#8C8AFF,#5E5CE6);
+  --g-leaf:linear-gradient(180deg,#5EDB7A,#2DB14E);
+  --g-coral:linear-gradient(180deg,#FF7A90,#FF375F);
+  --g-sky:linear-gradient(180deg,#64D2FF,#0A84FF);
+  --g-candy:linear-gradient(180deg,#E09BFF,#BF5AF2);
+  --sh-sm:0 1px 2px rgba(0,0,0,.04),0 2px 8px rgba(0,0,0,.04);
+  --sh-md:0 4px 12px rgba(0,0,0,.06),0 16px 40px rgba(0,0,0,.08);
+  --sh-sun:none; --sh-grape:none;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Text","SF Pro Display","Helvetica Neue",Inter,system-ui,sans-serif;
+  --head:-apple-system,BlinkMacSystemFont,"SF Pro Display","Helvetica Neue",Inter,system-ui,sans-serif;
+  --ease:cubic-bezier(.25,.1,.25,1);
+  --spring:cubic-bezier(.2,.9,.3,1.2);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:var(--font);color:var(--ink);background:#FBFBFD;font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--primary);cursor:pointer;text-decoration:none}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid rgba(0,113,227,.4);outline-offset:2px}
+h1,h2,h3{font-family:var(--head);letter-spacing:-.022em;margin:0;font-weight:600}
+h1{font-size:34px;line-height:1.12} h2{font-size:19px} h3{font-size:17px}
+.muted{color:var(--muted)} .small{font-size:12.5px} .b{font-weight:600}
+.row{display:flex;align-items:center;gap:8px}
+.wrap{flex-wrap:wrap}.between{justify-content:space-between}
+.col{display:flex;flex-direction:column}
+.grow{flex:1 1 auto;min-width:0}
+.gap4{gap:4px}.gap12{gap:12px}.gap16{gap:16px}.gap24{gap:24px}
+.card{background:#fff;border:1px solid var(--border);border-radius:18px;box-shadow:var(--sh-sm)}
+.pad{padding:20px}.pad24{padding:24px}
+.label{font-size:12px;font-weight:500;color:var(--muted)}
+svg.i{width:18px;height:18px;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+svg.i.sm{width:15px;height:15px}
+.gtext,.gtext-grape{color:inherit}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 18px;border-radius:980px;font-weight:500;font-size:14px;border:1px solid transparent;background:var(--gray-s);color:var(--ink);white-space:nowrap;transition:background .2s var(--ease),transform .15s var(--ease),opacity .2s}
+.btn:hover{background:#E8E8ED}
+.btn:active{transform:scale(.97)}
+.btn.primary{background:var(--primary);color:#fff}
+.btn.primary:hover{background:var(--primary-d)}
+.btn.dark{background:var(--ink);color:#fff}
+.btn.dark:hover{background:#000}
+.btn.danger{color:var(--red)}
+.btn.sm{min-height:34px;padding:0 14px;font-size:13px}
+.btn[disabled]{opacity:.35;cursor:not-allowed;transform:none}
+.iconbtn{position:relative;width:40px;height:40px;border-radius:50%;border:none;background:transparent;display:inline-flex;align-items:center;justify-content:center;color:var(--ink);transition:background .2s}
+.iconbtn:hover{background:var(--gray-s)}
+.dot{position:absolute;top:8px;right:8px;width:8px;height:8px;border-radius:50%;background:#FF3B30;border:2px solid #fff}
+
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:999px;font-size:12px;font-weight:500;white-space:nowrap}
+.p-green{background:var(--green-s);color:var(--green)}
+.p-amber{background:var(--amber-s);color:var(--amber)}
+.p-red{background:var(--red-s);color:var(--red)}
+.p-blue{background:var(--blue-s);color:var(--blue)}
+.p-gray{background:var(--gray-s);color:var(--gray)}
+.tabs{display:inline-flex;gap:2px;flex-wrap:wrap;padding:3px;background:rgba(118,118,128,.12);border-radius:10px}
+.tab{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 14px;border-radius:8px;border:none;background:transparent;font-weight:500;font-size:13px;color:var(--ink);transition:background .25s var(--ease),box-shadow .25s}
+.tab .ct{font-size:11.5px;color:var(--muted)}
+.tab.on{background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.12),0 0 0 .5px rgba(0,0,0,.04);font-weight:600}
+.chip{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--hair);background:#fff;font-weight:500;font-size:13px;transition:background .2s,border-color .2s,color .2s}
+.chip:hover{border-color:#B0B0B5}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+.field{display:flex;flex-direction:column;gap:6px}
+.field label{font-weight:500;font-size:13px}
+.input{width:100%;min-height:44px;padding:10px 14px;border:1px solid var(--hair);border-radius:12px;background:#fff;transition:border-color .2s,box-shadow .2s}
+.input:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px rgba(0,113,227,.15)}
+textarea.input{min-height:110px;resize:vertical}
+.hint{font-size:12px;color:var(--muted)}
+.warn{font-size:12.5px;color:var(--red);font-weight:500}
+.switch{position:relative;width:51px;height:31px;border-radius:999px;background:#E9E9EB;border:none;flex:none;transition:background .25s var(--ease)}
+.switch::after{content:"";position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;transition:left .3s var(--spring);box-shadow:0 3px 8px rgba(0,0,0,.15),0 1px 1px rgba(0,0,0,.08)}
+.switch.on{background:#34C759}
+.switch.on::after{left:22px}
+
+.logo{display:flex;align-items:center;gap:8px;font-family:var(--head);font-weight:600;font-size:21px;letter-spacing:-.02em;color:var(--ink)}
+.logo img{width:40px;height:auto;transition:transform .5s var(--spring)}
+.logo:hover img{transform:rotate(-8deg) scale(1.06)}
+.logo{border:none;background:none;padding:0;cursor:pointer}
+.logo-mark{width:30px;height:30px;flex:none;transition:transform .4s var(--spring)}
+.logo:hover .logo-mark{transform:scale(1.06)}
+.empty-ic,.tip-ic{width:44px;height:44px;border-radius:50%;background:var(--gray-s);color:var(--muted);display:flex;align-items:center;justify-content:center;flex:none}
+.tip-ic{width:34px;height:34px;background:#fff;color:#BF6A00}
+.toast-ic{width:26px;height:26px;border-radius:50%;background:#34C759;color:#fff;display:flex;align-items:center;justify-content:center}
+.hero-side{position:relative;z-index:1;margin-left:auto;width:300px;padding:14px 16px;border-radius:16px;box-shadow:var(--sh-md);animation:float 6s ease-in-out infinite}
+
+.c-header{position:sticky;top:0;z-index:30;background:rgba(255,255,255,.72);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(0,0,0,.08)}
+.c-header .in{max-width:1200px;margin:0 auto;padding:8px 24px;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.navl{display:inline-flex;align-items:center;gap:7px;min-height:36px;padding:0 14px;border-radius:999px;font-weight:500;color:var(--muted);border:none;background:none;transition:color .2s,background .2s}
+.navl:hover{color:var(--ink)}
+.navl.on{color:var(--ink);background:var(--gray-s)}
+.c-main{max-width:1200px;margin:0 auto;padding:32px 24px 80px}
+
+.p-shell{display:flex;min-height:100vh}
+.side{width:248px;flex:none;background:rgba(246,246,248,.85);backdrop-filter:blur(20px);border-right:1px solid rgba(0,0,0,.08);padding:18px 12px;display:flex;flex-direction:column;gap:18px;position:sticky;top:0;height:100vh;overflow:auto}
+.sidel{position:relative;display:flex;align-items:center;gap:10px;min-height:36px;padding:0 10px;border-radius:8px;font-weight:500;color:var(--ink);border:none;background:none;width:100%;text-align:left;transition:background .15s}
+.sidel svg{color:var(--primary)}
+.sidel:hover{background:rgba(0,0,0,.04)}
+.sidel.on{background:rgba(0,0,0,.07);font-weight:600}
+.sidel .bdg{margin-left:auto;font-size:11.5px;min-width:20px;text-align:center;padding:1px 7px;border-radius:999px;background:var(--primary);color:#fff;font-weight:600}
+.side-tip{position:relative;border-radius:14px;padding:14px;background:#fff;border:1px solid var(--border);color:var(--muted);font-size:12.5px}
+.side-tip img{position:absolute;right:-4px;top:-38px;width:60px;animation:float 4s ease-in-out infinite}
+.p-main{flex:1 1 auto;min-width:0;padding:22px 36px 80px}
+.p-top{display:none}
+.p-topbar{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin-bottom:10px}
+
+.avatar{width:36px;height:36px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-weight:600;font-size:13px;flex:none}
+.av-sq{border-radius:10px}
+.av-ring{box-shadow:none}
+
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:start}
+.split-l{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:24px;align-items:start}
+.split3{grid-template-columns:220px minmax(0,1fr) 300px}.split380{grid-template-columns:minmax(0,1fr) 390px}.split-job{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr)}.split-rev{grid-template-columns:320px minmax(0,1fr)}
+
+.hero{position:relative;overflow:hidden;border-radius:22px;padding:30px 32px;background:#fff;border:1px solid var(--border);box-shadow:var(--sh-sm);margin-bottom:24px;display:flex;align-items:center;gap:20px;flex-wrap:wrap;min-height:180px}
+.hero::before{content:"";position:absolute;width:420px;height:420px;right:-80px;top:-160px;border-radius:50%;background:radial-gradient(circle,rgba(255,214,10,.28),rgba(255,214,10,0) 65%);pointer-events:none}
+.hero.grape::before{background:radial-gradient(circle,rgba(10,132,255,.16),rgba(10,132,255,0) 65%)}
+.hero h1{font-size:30px}
+.hero .sub{color:var(--muted);font-size:16px;max-width:520px}
+.hero .mascot{position:absolute;right:34px;bottom:-12px;width:160px;animation:float 5s ease-in-out infinite;z-index:1}
+.hero .btn{z-index:1}
+.hero .btn.glass{background:#fff;border-color:var(--hair);color:var(--ink)}
+.hero .btn.glass:hover{background:var(--gray-s)}
+.hero-content{position:relative;z-index:1;flex:1 1 380px;display:flex;flex-direction:column;gap:8px}
+.eyebrow{font-size:13px;font-weight:600;color:#BF6A00}
+
+.stat{transition:transform .3s var(--ease),box-shadow .3s}
+.stat:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+.stat .v{font-family:var(--head);font-size:30px;font-weight:600;letter-spacing:-.02em}
+.stat .bub{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#fff}
+.stat .bub svg{width:18px;height:18px}
+.ph{border-radius:12px;background:var(--ground);border:1px dashed var(--hair);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--muted);font-size:12px;text-align:center;padding:8px}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;color:var(--muted);font-size:13px}
+.meta span{display:inline-flex;align-items:center;gap:6px}
+.jobcard{padding:20px;display:flex;gap:16px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.jobcard:hover,.lift:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+.lift{transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.caticon{width:44px;height:44px;border-radius:11px;background:var(--g-sky);color:#fff;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:inset 0 0 0 .5px rgba(0,0,0,.06)}
+.stars{letter-spacing:1px;white-space:nowrap}
+.stars .on{color:var(--star)} .stars .off{color:#E1E1E6}
+.divider{height:1px;background:var(--border);margin:16px 0}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:12px;font-weight:500;color:var(--muted);padding:12px 16px;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:14px 16px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:#FAFAFC}
+.tablebox{overflow-x:auto}
+.crumb{display:inline-flex;align-items:center;gap:4px;font-weight:500;color:var(--primary);border:none;background:none;padding:0;min-height:32px}
+.crumb:hover{text-decoration:underline}
+.bar-wrap{display:flex;align-items:flex-end;gap:12px;height:230px;padding-top:10px}
+.bar{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.bar .fill{width:100%;max-width:40px;border-radius:8px 8px 3px 3px;background:var(--primary);transform-origin:bottom;animation:grow .8s var(--ease) both}
+.bar .fill.cur{background:#FF9F0A}
+.bar .v{font-size:11px;color:var(--muted);font-weight:500}
+.dist{display:flex;align-items:center;gap:10px;font-size:13px}
+.dist .track{flex:1;height:6px;border-radius:99px;background:var(--gray-s);overflow:hidden}
+.dist .track div{height:100%;background:#FF9F0A;border-radius:99px;transform-origin:left;animation:growX .9s var(--ease) both}
+.stepper{display:flex;flex-direction:column;gap:2px}
+.step{display:flex;align-items:center;gap:12px;padding:9px 10px;border-radius:10px;border:none;background:none;text-align:left;font-weight:500;color:var(--muted);transition:background .2s}
+.step .n{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--hair);display:flex;align-items:center;justify-content:center;font-size:12.5px;flex:none;transition:all .3s var(--ease)}
+.step.on{background:var(--gray-s);color:var(--ink);font-weight:600}
+.step.on .n{border-color:var(--primary);background:var(--primary);color:#fff}
+.step.done{color:var(--ink)}
+.step.done .n{border-color:#34C759;background:#34C759;color:#fff}
+.catbtn{display:flex;flex-direction:column;align-items:flex-start;gap:10px;padding:16px;border-radius:16px;border:1px solid var(--border);background:#fff;text-align:left;font-weight:500;transition:transform .25s var(--ease),box-shadow .25s,border-color .2s}
+.catbtn:hover{transform:translateY(-2px);box-shadow:var(--sh-md)}
+.catbtn.on{border-color:var(--primary);box-shadow:0 0 0 3px rgba(0,113,227,.18)}
+.banner{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:14px;font-weight:500;animation:fadeUp .4s var(--ease)}
+.banner.ok{background:var(--green-s);color:var(--green)}
+.banner.bad{background:var(--red-s);color:var(--red)}
+.starbtn{font-size:32px;line-height:1;background:none;border:none;padding:4px;color:#E1E1E6;transition:transform .2s var(--spring),color .2s}
+.starbtn:hover{transform:scale(1.15)}
+.starbtn.on{color:var(--star)}
+.sum-row{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--border)}
+.sum-row:last-child{border-bottom:none}
+.tip{display:flex;gap:12px;align-items:flex-start;padding:14px;border-radius:16px;background:var(--ground)}
+.tip img{width:48px;flex:none}
+.bubble{background:#fff;border-radius:14px;padding:10px 12px;font-size:13px;color:var(--ink);box-shadow:var(--sh-sm)}
+.empty{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:36px 20px}
+.empty img{width:96px;margin-bottom:6px}
+
+.tracker{display:flex;align-items:center;margin:4px 0 20px}
+.tracker .t{display:flex;flex-direction:column;align-items:center;gap:6px;flex:0 0 auto;font-size:12px;font-weight:500;color:var(--muted)}
+.tracker .t .c{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#fff;border:1.5px solid var(--hair);font-size:12px}
+.tracker .t.done .c{background:#34C759;border-color:#34C759;color:#fff}
+.tracker .t.cur .c{background:var(--primary);border-color:var(--primary);color:#fff;box-shadow:0 0 0 5px rgba(0,113,227,.15)}
+.tracker .t.done,.tracker .t.cur{color:var(--ink)}
+.tracker .ln{flex:1;height:2px;border-radius:2px;background:var(--border);margin:0 8px 20px;overflow:hidden}
+.tracker .ln.done::after{content:"";display:block;height:100%;background:#34C759;transform-origin:left;animation:growX .7s var(--ease) both}
+
+.meter{height:6px;border-radius:99px;background:var(--gray-s);overflow:hidden}
+.meter div{height:100%;border-radius:99px;transition:width .5s var(--ease),background .3s}
+
+.notif-wrap{position:relative}
+.drop{position:absolute;right:0;top:48px;width:360px;max-width:90vw;background:rgba(255,255,255,.92);backdrop-filter:blur(24px);border:1px solid rgba(0,0,0,.08);border-radius:16px;box-shadow:var(--sh-md);padding:8px;z-index:40;animation:dropIn .25s var(--ease);transform-origin:top right}
+.drop .ni{display:flex;gap:12px;padding:10px;border-radius:10px;align-items:flex-start;border:none;background:none;width:100%;text-align:left;transition:background .15s}
+.drop .ni:hover{background:rgba(0,0,0,.04)}
+.drop .ni.unread .b::before{content:"";display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--primary);margin-right:6px;vertical-align:middle}
+.drawer{position:fixed;top:0;right:0;height:100vh;width:390px;max-width:100vw;background:#fff;z-index:55;box-shadow:-10px 0 40px rgba(0,0,0,.12);display:flex;flex-direction:column;animation:slideIn .35s var(--ease)}
+.drawer-h{padding:14px 16px;display:flex;align-items:center;gap:12px;border-bottom:1px solid var(--border)}
+.drawer-b{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:8px}
+.msg{max-width:78%;padding:8px 13px;border-radius:18px;font-size:14px;animation:fadeUp .25s var(--ease)}
+.msg.me{align-self:flex-end;background:#0A84FF;color:#fff;border-bottom-right-radius:5px}
+.msg.them{align-self:flex-start;background:#E9E9EB;border-bottom-left-radius:5px}
+.msg .tm{display:block;font-size:10.5px;opacity:.6;margin-top:2px}
+.typing{align-self:flex-start;background:#E9E9EB;padding:12px 14px;border-radius:18px;display:flex;gap:4px}
+.typing span{width:7px;height:7px;border-radius:50%;background:#8E8E93;animation:bounce 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+.drawer-f{padding:12px;display:flex;gap:8px;border-top:1px solid var(--border)}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.28);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:20px;z-index:50;animation:fade .2s}
+.modal{background:#fff;border-radius:20px;width:100%;max-width:540px;max-height:90vh;overflow:auto;padding:26px;box-shadow:0 30px 80px rgba(0,0,0,.2);animation:modalIn .35s var(--spring)}
+.modal.wide{max-width:860px}
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%);background:rgba(29,29,31,.92);backdrop-filter:blur(20px);color:#fff;padding:10px 18px 10px 10px;border-radius:999px;font-weight:500;display:flex;align-items:center;gap:10px;z-index:70;box-shadow:0 12px 30px rgba(0,0,0,.2);animation:toastIn .4s var(--spring)}
+.toast img{width:30px}
+.cmpbar{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:45;display:flex;align-items:center;gap:12px;padding:8px 8px 8px 18px;border-radius:999px;background:rgba(29,29,31,.92);backdrop-filter:blur(20px);color:#fff;box-shadow:0 12px 30px rgba(0,0,0,.2);animation:toastIn .35s var(--spring)}
+.cbx{display:inline-flex;align-items:center;gap:7px;font-weight:500;font-size:13px;cursor:pointer;user-select:none}
+.cbx input{width:17px;height:17px;accent-color:var(--primary)}
+.confetti{position:fixed;top:-12px;width:8px;height:12px;z-index:80;pointer-events:none;border-radius:2px;animation:fall var(--d,2.4s) cubic-bezier(.3,.6,.5,1) forwards}
+
+.welcome{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 20px;text-align:center;position:relative;overflow:hidden;background:#fff}
+.welcome::before{content:"";position:absolute;width:760px;height:760px;left:50%;top:-360px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(255,214,10,.22),rgba(255,214,10,0) 62%);pointer-events:none}
+.welcome-icon .logo-mark{width:96px;height:96px;filter:drop-shadow(0 14px 24px rgba(0,98,224,.28));animation:float 5s ease-in-out infinite}
+.welcome h1{font-size:56px;line-height:1.05;letter-spacing:-.035em;margin-top:14px}
+.role-grid{display:grid;grid-template-columns:repeat(2,minmax(0,310px));gap:18px;margin-top:34px}
+.role{position:relative;text-align:left;padding:24px;border-radius:22px;border:1px solid var(--border);background:#fff;color:var(--ink);display:flex;flex-direction:column;gap:8px;min-height:200px;box-shadow:var(--sh-sm);transition:transform .35s var(--ease),box-shadow .35s}
+.role:hover{transform:translateY(-4px);box-shadow:var(--sh-md)}
+.role .ico{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;color:#fff;margin-bottom:6px}
+.role .ico svg{width:24px;height:24px}
+.role h2{font-size:22px}
+.role .go{margin-top:auto;display:inline-flex;align-items:center;gap:4px;font-weight:500;color:var(--primary);transition:gap .25s var(--ease)}
+.role:hover .go{gap:8px}
+
+
+#intro{position:fixed;inset:0;z-index:100;background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;animation:introOut .7s var(--ease) 2.5s forwards}
+#intro::before{content:"";position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(0,113,227,.10),rgba(0,113,227,0) 65%);animation:fade 1.2s var(--ease) both}
+.intro-in{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center}
+.intro-mark svg{width:76px;height:76px;display:block;filter:drop-shadow(0 14px 24px rgba(0,98,224,.25));animation:introPop .8s var(--spring) both}
+.intro-by{margin-top:26px;font-size:12px;font-weight:600;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);opacity:0;animation:fadeUp .5s var(--ease) .55s forwards}
+.intro-name{display:flex;margin-top:22px;font-family:var(--head);font-size:46px;font-weight:600;letter-spacing:-.03em;color:var(--ink)}
+.intro-name span{display:inline-block;opacity:0;transform:translateY(20px);animation:letterIn .55s var(--spring) forwards;animation-delay:calc(.8s + var(--i) * 55ms)}
+.intro-name .sp{width:.26em}
+.intro-tag{margin-top:14px;animation-delay:1.25s}
+.intro-line{height:3px;width:0;margin-top:16px;border-radius:3px;background:var(--primary);animation:lineGrow .6s var(--ease) 1.5s forwards}
+@keyframes introPop{from{opacity:0;transform:scale(.6) rotate(-8deg)}to{opacity:1;transform:none}}
+@keyframes letterIn{to{opacity:1;transform:none}}
+@keyframes lineGrow{to{width:120px}}
+@keyframes introOut{to{opacity:0;visibility:hidden;transform:scale(1.03)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes grow{from{transform:scaleY(0)}to{transform:scaleY(1)}}
+@keyframes growX{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes dropIn{from{opacity:0;transform:scale(.96) translateY(-4px)}to{opacity:1;transform:none}}
+@keyframes slideIn{from{transform:translateX(100%)}to{transform:none}}
+@keyframes modalIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+@keyframes toastIn{from{opacity:0;transform:translate(-50%,16px)}to{opacity:1;transform:translate(-50%,0)}}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-4px)}}
+@keyframes fall{to{transform:translate(var(--x,0),105vh) rotate(var(--r,540deg));opacity:.9}}
+.enter .stagger>*{animation:fadeUp .6s var(--ease) both}
+.enter .stagger>*:nth-child(2){animation-delay:.05s}.enter .stagger>*:nth-child(3){animation-delay:.1s}
+.enter .stagger>*:nth-child(4){animation-delay:.15s}.enter .stagger>*:nth-child(5){animation-delay:.2s}
+.enter .stagger>*:nth-child(6){animation-delay:.25s}.enter .stagger>*:nth-child(7){animation-delay:.3s}
+.enter .stagger>*:nth-child(n+8){animation-delay:.35s}
+.enter .hero{animation:fadeUp .6s var(--ease) both}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}}
+
+@media (max-width:1100px){
+  .split,.split-l,.split3,.split380,.split-job,.split-rev{grid-template-columns:minmax(0,1fr)}
+  .g4,.g3{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:820px){
+  .p-shell{flex-direction:column}
+  .side{display:none}
+  .p-top{display:flex;align-items:center;gap:6px;padding:8px 12px;background:rgba(255,255,255,.85);backdrop-filter:blur(20px);border-bottom:1px solid rgba(0,0,0,.08);overflow-x:auto;position:sticky;top:0;z-index:20}
+  .p-top .sidel{width:auto;white-space:nowrap}
+  .p-main{padding:16px 16px 70px}
+  .c-main{padding:20px 16px 70px}
+  .g2,.g3,.g4,.role-grid{grid-template-columns:minmax(0,1fr)}
+  .jobcard{flex-direction:column}
+  .hero-content{padding-right:0}
+  .hero-side{width:100%;margin-left:0}
+  h1{font-size:28px}.welcome h1{font-size:38px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs><linearGradient id="bylg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3B97FF"/><stop offset="1" stop-color="#0062E0"/></linearGradient></defs></svg>
+<div id="intro" role="presentation" title="Click to skip">
+  <div class="intro-in">
+    <span class="intro-mark"><svg class="logo-mark" viewBox="0 0 1024 1024" aria-hidden="true"><rect width="1024" height="1024" rx="230" fill="url(#bylg)"/><g transform="translate(-32 -4)" fill="#fff"><path d="M328 276 A56 56 0 0 1 440 276 L440 600 L328 600 Z M328 600 L440 600 L440 800 L384 800 A56 56 0 0 1 328 744 Z"/><path fill-rule="evenodd" d="M560 400 A200 200 0 0 1 760 600 L760 772 Q760 800 732 800 L384 800 L384 600 L360 600 A200 200 0 0 1 560 400 Z M560 506 A94 94 0 1 0 560 694 A94 94 0 1 0 560 506 Z"/></g></svg></span>
+    <div class="intro-name" aria-label="Bidyard"><span style="--i:0">B</span><span style="--i:1">i</span><span style="--i:2">d</span><span style="--i:3">y</span><span style="--i:4">a</span><span style="--i:5">r</span><span style="--i:6">d</span></div>
+    <div class="intro-by intro-tag">Jobs and bidding, done right</div>
+    <div class="intro-line"></div>
+  </div>
+</div>
+<div id="app"></div>
+<div id="layer"></div>
+<div id="drawer"></div>
+
+<script>
+const BRAND = ["Bid","yard"];
+// Sample data, shaped like the database schema
+const ICONS = {
+  arrowUp:'<path d="M12 19V5M6 11l6-6 6 6"/>',
+  file:'<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5"/>',
+  filter:'<path d="M3 5h18l-7 8v6l-4 2v-8z"/>',
+  briefcase:'<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  search:'<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
+  pin:'<path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/>',
+  calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18"/>',
+  building:'<rect x="4" y="3" width="16" height="18" rx="1"/><path d="M9 7h1M14 7h1M9 11h1M14 11h1M9 15h1M14 15h1M10 21v-3h4v3"/>',
+  wallet:'<path d="M3 7a2 2 0 0 1 2-2h13v4"/><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="16.5" cy="13.5" r="1.2"/>',
+  users:'<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6"/>',
+  star:'<path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/>',
+  layers:'<path d="m12 3 9 5-9 5-9-5z"/><path d="m3 13 9 5 9-5"/>',
+  grid:'<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
+  send:'<path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4z"/>',
+  image:'<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 17-5-5-9 8"/>',
+  check:'<path d="m5 12 5 5 9-10"/>',
+  x:'<path d="M6 6l12 12M18 6 6 18"/>',
+  chevR:'<path d="m9 6 6 6-6 6"/>',
+  chevL:'<path d="m15 6-6 6 6 6"/>',
+  clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
+  shield:'<path d="M12 3 4 6v6c0 4.5 3.4 8 8 9 4.6-1 8-4.5 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+  upload:'<path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/>',
+  tag:'<path d="M3 12V4h8l10 10-8 8z"/><circle cx="7.5" cy="8.5" r="1.3"/>',
+  message:'<path d="M4 5h16v11H9l-5 4z"/>',
+  trending:'<path d="m3 17 6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+  switch:'<path d="M7 7h13l-4-4M17 17H4l4 4"/>',
+  edit:'<path d="M4 20h4L19 9l-4-4L4 16z"/>',
+  bookmark:'<path d="M6 3h12v18l-6-4-6 4z"/>',
+  phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/>',
+  dollar:'<path d="M12 3v18M16.5 7.5c0-1.7-2-3-4.5-3s-4.5 1.3-4.5 3 2 2.6 4.5 3 4.5 1.3 4.5 3-2 3-4.5 3-4.5-1.3-4.5-3"/>',
+  receipt:'<path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/>',
+  mail:'<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+  award:'<circle cx="12" cy="9" r="6"/><path d="m8.5 14-1.5 7 5-3 5 3-1.5-7"/>',
+  wrench:'<path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.5 2.5-2.4-.6-.6-2.4z"/>',
+  bolt:'<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>',
+  wind:'<path d="M3 8h11a3 3 0 1 0-3-3M3 12h16a3 3 0 1 1-3 3M3 16h8"/>',
+  sparkle:'<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+  brush:'<path d="M18 3l3 3-9 9-3-3z"/><path d="M9 12c-3 0-5 2-5 5 0 1-1 2-2 2 2 2 7 2 9-1 1-1.5 1-3 1-3z"/>',
+  bug:'<rect x="7" y="7" width="10" height="13" rx="5"/><path d="M12 7V4M7 12H3M21 12h-4M7 17l-3 2M17 17l3 2M7 9 4 7M17 9l3-2"/>',
+  hammer:'<path d="m14 6 4 4-10 10-4-4z"/><path d="m14 6 3-3 4 4-3 3"/>',
+  plug:'<path d="M9 2v6M15 2v6M6 8h12v4a6 6 0 0 1-12 0zM12 18v4"/>',
+  trash:'<path d="M4 7h16M9 7V4h6v3M6 7l1 14h10l1-14"/>',
+  eye:'<path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+};
+const ic = (n, cls='') => `<svg class="i ${cls}" viewBox="0 0 24 24" aria-hidden="true">${ICONS[n]||''}</svg>`;
+
+const CATS = [ // servicesCategories
+  {id:1, category:'Plumbing', icon:'wrench', g:'var(--g-sky)', subs:['Leak repair','Drain cleaning','Water heater','Repiping','Backflow testing']},
+  {id:2, category:'Electrical', icon:'bolt', g:'var(--g-sun)', subs:['Lighting install','Panel upgrade','Wiring','Outlet repair']},
+  {id:3, category:'HVAC', icon:'wind', g:'var(--g-leaf)', subs:['AC repair','Duct cleaning','Heating service']},
+  {id:4, category:'Cleaning', icon:'sparkle', g:'var(--g-candy)', subs:['Deep clean','Kitchen hood','Window cleaning']},
+  {id:5, category:'Painting', icon:'brush', g:'var(--g-coral)', subs:['Interior','Exterior','Touch-ups']},
+  {id:6, category:'Pest control', icon:'bug', g:'var(--g-leaf)', subs:['Inspection','Treatment','Rodent control']},
+  {id:7, category:'Carpentry', icon:'hammer', g:'var(--g-sun)', subs:['Shelving','Doors & frames','Cabinet repair']},
+  {id:8, category:'Appliance repair', icon:'plug', g:'var(--g-grape)', subs:['Dishwasher','Refrigeration','Oven & range']},
+];
+const PROPERTY_TYPES = ['Commercial kitchen','Restaurant','Office','Retail store','Warehouse','Apartment','House','Clinic'];
+
+const CLIENTS = { // client: name, location, business type
+  c1:{name:'Harbor Street Bakery', contact:'Amina Khan', location:'Austin, TX', business_type:'Restaurant & café', jobs_posted:6, hire_rate:67, member:'2024'},
+  c2:{name:'Riverside Print Shop', location:'Austin, TX', business_type:'Retail', jobs_posted:3, hire_rate:100, member:'2025'},
+  c3:{name:'Cedar Park Clinic', location:'Cedar Park, TX', business_type:'Healthcare', jobs_posted:11, hire_rate:82, member:'2023'},
+  c4:{name:'Southside Yoga', location:'Austin, TX', business_type:'Fitness studio', jobs_posted:2, hire_rate:50, member:'2025'},
+  c5:{name:'Mosaic Coworking', location:'Austin, TX', business_type:'Office space', jobs_posted:9, hire_rate:78, member:'2024'},
+  c6:{name:'Lakeline Lofts', location:'Austin, TX', business_type:'Property management', jobs_posted:24, hire_rate:88, member:'2022'},
+  c7:{name:'Pho Saigon', location:'Austin, TX', business_type:'Restaurant', jobs_posted:7, hire_rate:71, member:'2024'},
+};
+
+const PROVIDERS = {
+  p1:{name:'FlowRight Plumbing', initials:'FR', rating:4.9, reviews:212, jobs:340, since:'2021', response:'~1 hr', verified:true, color:'#FFF1C2', fg:'#8A5A00', tagline:'Licensed commercial & residential plumbing', loc:'North Austin, TX'},
+  p2:{name:'Mendez & Sons Plumbing', initials:'MS', rating:4.8, reviews:96, jobs:151, since:'2022', response:'~2 hrs', verified:true, color:'#E6EDFB', fg:'#1D4ED8', tagline:'Family-run plumbing since 1998', loc:'East Austin, TX'},
+  p3:{name:'QuickFix Pro Services', initials:'QF', rating:4.6, reviews:58, jobs:77, since:'2023', response:'~30 min', verified:false, color:'#FDF0E1', fg:'#A64B08', tagline:'Same-day handyman and plumbing', loc:'Austin, TX'},
+  p4:{name:'Austin Pipe Works', initials:'AP', rating:5.0, reviews:31, jobs:40, since:'2024', response:'~3 hrs', verified:true, color:'#F3E8FF', fg:'#6B21A8', tagline:'Commercial pipe specialists', loc:'Round Rock, TX'},
+  p5:{name:'Lone Star Repairs', initials:'LS', rating:4.4, reviews:19, jobs:22, since:'2025', response:'~4 hrs', verified:false, color:'#FDECEA', fg:'#B42318', tagline:'Affordable repairs, fast', loc:'Pflugerville, TX'},
+  p6:{name:'BlueLine Plumbing', initials:'BL', rating:4.7, reviews:64, jobs:98, since:'2022', response:'~1 hr', verified:true, color:'#E0F2FE', fg:'#075985', tagline:'Plumbing for restaurants and retail', loc:'Austin, TX'},
+  p7:{name:'Capitol Drain Co.', initials:'CD', rating:4.5, reviews:40, jobs:63, since:'2023', response:'~2 hrs', verified:true, color:'#EEF0EC', fg:'#4B5563', tagline:'Drains, sewers and grease traps', loc:'South Austin, TX'},
+  p8:{name:'CoolFlow HVAC', initials:'CF', rating:4.8, reviews:120, jobs:210, since:'2021', response:'~1 hr', verified:true, color:'#E6EDFB', fg:'#1D4ED8', tagline:'Commercial HVAC service', loc:'Austin, TX'},
+  p9:{name:'SparkLine Electric', initials:'SE', rating:4.7, reviews:88, jobs:130, since:'2022', response:'~2 hrs', verified:true, color:'#FDF0E1', fg:'#A64B08', tagline:'Commercial electrical contractor', loc:'Austin, TX'},
+  p10:{name:'Fresh Start Cleaning', initials:'FS', rating:4.9, reviews:150, jobs:260, since:'2021', response:'~1 hr', verified:true, color:'#E3F0EA', fg:'#17573F', tagline:'Kitchen and commercial cleaning', loc:'Austin, TX'},
+};
+const ME = 'p1';           // logged-in service provider
+const MY_CLIENT = 'c1';    // logged-in client
+
+const S = { // app state
+  role:'welcome', view:'welcome', param:null, chat:{open:false, with:null, typing:false, threads:{}}, notifOpen:false,
+  notifs:{customer:[{t:'New bid on #J-1042',d:'Lone Star Repairs bid $150',ago:'5m',ic:'send',unread:true},{t:'CoolFlow HVAC finished #J-1031',d:'Leave a review to help others',ago:'2h',ic:'star',unread:true},{t:'Bid shortlisted reminder',d:'You have 7 bids waiting on Leak repair',ago:'1d',ic:'bell',unread:false}],
+    provider:[{t:'You were shortlisted',d:'Cedar Park Clinic · Water heater',ago:'12m',ic:'award',unread:true},{t:'Payment released',d:'$1,150.00 from Elm Street Dental',ago:'1d',ic:'wallet',unread:true},{t:'New job near you',d:'Repiping · Lakeline Lofts · $3.2k to $4.5k',ago:'2d',ic:'briefcase',unread:false}]},
+  compare:[],
+  jobs:[
+    {id:1042, client:'c1', cat:1, sub:'Leak repair', min_price:150, price_max:300, address:'214 Harbor St, Austin, TX 78701', property_type:'Commercial kitchen', problem:'Water is leaking under the 3-compartment sink in the back kitchen. The pipe joint below the drain looks corroded and the floor stays wet after closing.', date:'2026-11-12', images:3, status:'active', isInclusive:true, is_active:true, posted:'3h ago', dist:'2.4 mi'},
+    {id:1039, client:'c1', cat:2, sub:'Lighting install', min_price:600, price_max:900, address:'214 Harbor St, Austin, TX 78701', property_type:'Restaurant', problem:'Replace 12 old fluorescent fixtures in the dining area with LED panel lights. Ceiling height is about 10 ft; work must happen after 9pm.', date:'2026-11-15', images:2, status:'active', isInclusive:false, is_active:true, posted:'1d ago', dist:'2.4 mi'},
+    {id:1044, client:'c1', cat:6, sub:'Inspection', min_price:120, price_max:200, address:'214 Harbor St, Austin, TX 78701', property_type:'Commercial kitchen', problem:'Quarterly pest inspection ahead of health inspection. Need a written report we can show the inspector.', date:'2026-11-18', images:0, status:'active', isInclusive:true, is_active:true, posted:'8h ago', dist:'2.4 mi'},
+    {id:1031, client:'c1', cat:3, sub:'Duct cleaning', min_price:400, price_max:550, address:'214 Harbor St, Austin, TX 78701', property_type:'Restaurant', problem:'Full duct cleaning for dining room and kitchen supply vents.', date:'2026-10-28', images:1, status:'completed', isInclusive:true, is_active:false, posted:'Oct 20', dist:'2.4 mi', hired:'p8', paid:480, review:null},
+    {id:1027, client:'c1', cat:4, sub:'Kitchen hood', min_price:300, price_max:400, address:'214 Harbor St, Austin, TX 78701', property_type:'Commercial kitchen', problem:'Degrease kitchen hood, filters and exhaust fan.', date:'2026-10-20', images:2, status:'completed', isInclusive:true, is_active:false, posted:'Oct 12', dist:'2.4 mi', hired:'p10', paid:350, review:{stars:5, text:'Hood looks brand new and they finished before opening.', response:'Thanks Amina, see you next quarter!'}},
+    {id:1019, client:'c1', cat:5, sub:'Interior', min_price:800, price_max:1200, address:'214 Harbor St, Austin, TX 78701', property_type:'Restaurant', problem:'Repaint front-of-house walls, approx. 1,100 sq ft.', date:'2026-10-02', images:1, status:'canceled', isInclusive:false, is_active:false, posted:'Sep 21', dist:'2.4 mi'},
+    // other clients' jobs (visible in provider feed)
+    {id:1047, client:'c2', cat:2, sub:'Panel upgrade', min_price:1800, price_max:2600, address:'901 W 5th St, Austin, TX 78703', property_type:'Retail store', problem:'Upgrade 100A panel to 200A to support two new large-format printers. Permit required.', date:'2026-11-20', images:2, status:'active', isInclusive:false, is_active:true, posted:'1h ago', dist:'5.1 mi'},
+    {id:1046, client:'c3', cat:1, sub:'Water heater', min_price:900, price_max:1400, address:'1400 Medical Pkwy, Cedar Park, TX 78613', property_type:'Clinic', problem:'Replace a failing 50-gallon gas water heater serving 6 exam rooms. Must be done on a Saturday.', date:'2026-11-14', images:2, status:'active', isInclusive:true, is_active:true, posted:'5h ago', dist:'14 mi'},
+    {id:1045, client:'c4', cat:3, sub:'AC repair', min_price:250, price_max:450, address:'2200 S Lamar Blvd, Austin, TX 78704', property_type:'Office', problem:'Rooftop unit blowing warm air in the main studio. Thermostat works; unit is about 8 years old.', date:'2026-11-10', images:1, status:'active', isInclusive:false, is_active:true, posted:'6h ago', dist:'6.8 mi'},
+    {id:1043, client:'c5', cat:4, sub:'Deep clean', min_price:500, price_max:800, address:'510 E 6th St, Austin, TX 78701', property_type:'Office', problem:'Deep clean of 6,000 sq ft coworking floor including kitchenette and two restrooms.', date:'2026-11-13', images:3, status:'active', isInclusive:true, is_active:true, posted:'10h ago', dist:'3.0 mi'},
+    {id:1041, client:'c6', cat:1, sub:'Drain cleaning', min_price:150, price_max:250, address:'11000 Lakeline Blvd, Austin, TX 78717', property_type:'Apartment', problem:'Slow drains in units 204 and 206, likely a shared line. Camera inspection preferred.', date:'2026-11-11', images:0, status:'active', isInclusive:false, is_active:true, posted:'1d ago', dist:'11 mi'},
+    {id:1040, client:'c7', cat:8, sub:'Dishwasher', min_price:180, price_max:300, address:'7800 N Lamar Blvd, Austin, TX 78752', property_type:'Restaurant', problem:'Commercial dishwasher not reaching rinse temperature. Model info in photos.', date:'2026-11-09', images:2, status:'active', isInclusive:false, is_active:true, posted:'1d ago', dist:'4.2 mi'},
+    {id:1048, client:'c6', cat:1, sub:'Repiping', min_price:3200, price_max:4500, address:'11000 Lakeline Blvd, Austin, TX 78717', property_type:'Apartment', problem:'Repipe galvanized supply lines in building C (8 units). Phased work to limit shutoffs.', date:'2026-12-01', images:4, status:'active', isInclusive:true, is_active:true, posted:'2d ago', dist:'11 mi'},
+  ],
+  bids:[ // bids + job_applications (app_status)
+    {id:1, job:1042, provider:'p1', amount:185, duration:'2 hrs', description:'Can be on site Nov 12 at 7am before opening. Replace the corroded joint and P-trap with new schedule 40 PVC, pressure test, and clean up. All parts included.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 7, 2026'},
+    {id:2, job:1042, provider:'p2', amount:220, duration:'3 hrs', description:'Licensed master plumber. We will inspect the full drain assembly and replace any corroded fittings. 1-year labor warranty.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 7, 2026'},
+    {id:3, job:1042, provider:'p3', amount:160, duration:'2 hrs', description:'Available same day. Price covers labor and standard fittings.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 7, 2026'},
+    {id:4, job:1042, provider:'p4', amount:240, duration:'2-3 hrs', description:'Commercial kitchen specialists. We carry NSF-rated parts and can provide documentation for your health inspection.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 7, 2026'},
+    {id:5, job:1042, provider:'p5', amount:150, duration:'2 hrs', description:'Lowest price guaranteed. Parts billed separately if more than the joint needs replacing.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 7, 2026'},
+    {id:6, job:1042, provider:'p6', amount:205, duration:'2 hrs', description:'We service 40+ Austin restaurants. Includes leak check of the hot and cold supply lines.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 7, 2026'},
+    {id:7, job:1042, provider:'p7', amount:275, duration:'3 hrs', description:'Includes hydro-jetting the sink drain line to prevent future backups.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 7, 2026'},
+    {id:8, job:1039, provider:'p9', amount:780, duration:'1 night', description:'12 x 2x4 LED panels, 4000K, installed after hours. Disposal of old fixtures included.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 6, 2026'},
+    {id:9, job:1039, provider:'p3', amount:690, duration:'1 night', description:'Labor only; we can source fixtures at cost.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 6, 2026'},
+    {id:10, job:1044, provider:'p5', amount:140, duration:'1 hr', description:'Inspection with written report.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 7, 2026'},
+    // FlowRight's other bids
+    {id:11, job:1046, provider:'p1', amount:1120, duration:'5 hrs', description:'50-gal high-efficiency gas heater, Saturday install, haul-away included.', status:'pending', app_status:'Shortlisted', is_active:true, is_won:false, submitted:'Nov 6, 2026'},
+    {id:12, job:1041, provider:'p1', amount:160, duration:'1.5 hrs', description:'Camera inspection plus snaking of shared line.', status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 6, 2026'},
+    {id:13, job:1048, provider:'p1', amount:3800, duration:'4 days', description:'PEX repipe in 2 phases, max 4-hour shutoff per unit.', status:'pending', app_status:'Viewed', is_active:true, is_won:false, submitted:'Nov 5, 2026'},
+  ],
+  pastBids:[ // historic bids of ME (jobs not in feed)
+    {id:21, title:'Restroom repipe', client:'Union Coffee Co.', amount:780, status:'won', app_status:'Hired · In progress', submitted:'Oct 29, 2026'},
+    {id:22, title:'Leak repair', client:'Greenway Fitness', amount:400, status:'won', app_status:'Hired · In progress', submitted:'Oct 26, 2026'},
+    {id:23, title:'Water heater replacement', client:'Elm Street Dental', amount:1250, status:'won', app_status:'Completed', submitted:'Oct 15, 2026'},
+    {id:24, title:'Grease trap replacement', client:'Pho Saigon', amount:640, status:'lost', app_status:'Not selected', submitted:'Oct 20, 2026'},
+    {id:25, title:'Drain cleaning', client:'Westlake Gym', amount:210, status:'withdrawn', app_status:'-', submitted:'Oct 12, 2026'},
+  ],
+  saved:{},
+  fin:{available:3240.50, pending:1180.00, taxesYTD:2146.80, clients:84, jobs:340, contracts:3},
+  tx:[
+    {dt:'2026-11-06 14:22', type:'Payment', desc:'Water heater replacement · Elm Street Dental', contract:'C-2291', gross:1250, tax:100, status:'Paid'},
+    {dt:'2026-11-04 09:10', type:'Withdrawal', desc:'Transfer to bank ••4821', contract:'-', gross:-2000, tax:0, status:'Completed'},
+    {dt:'2026-11-03 17:45', type:'Payment', desc:'Drain cleaning · Maple Grove Apartments', contract:'C-2287', gross:320, tax:25.6, status:'Paid'},
+    {dt:'2026-11-02 11:30', type:'Escrow', desc:'Restroom repipe · Union Coffee Co.', contract:'C-2294', gross:780, tax:62.4, status:'Pending'},
+    {dt:'2026-11-01 08:05', type:'Escrow', desc:'Leak repair · Greenway Fitness', contract:'C-2295', gross:400, tax:32, status:'Pending'},
+    {dt:'2026-10-30 16:40', type:'Payment', desc:'Garbage disposal install · Rosa\'s Taqueria', contract:'C-2280', gross:260, tax:20.8, status:'Paid'},
+    {dt:'2026-10-28 10:12', type:'Payment', desc:'Backflow testing · Sunrise Daycare', contract:'C-2276', gross:180, tax:14.4, status:'Paid'},
+    {dt:'2026-10-21 13:05', type:'Withdrawal', desc:'Transfer to bank ••4821', contract:'-', gross:-1500, tax:0, status:'Completed'},
+  ],
+  earnings:{labels:['Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov'], values:[4200,3800,4100,5200,6100,6900,7400,7100,6600,5900,6300,4870]},
+  reviews:[
+    {id:1, client:'Elm Street Dental', job:'Water heater replacement', date:'Nov 6, 2026', stars:5, text:'Daniel\'s crew swapped our 80-gallon heater before patients arrived. Clean, fast, and they hauled the old unit away.', response:'Thank you! Glad the morning schedule wasn\'t affected.'},
+    {id:2, client:'Maple Grove Apartments', job:'Drain cleaning', date:'Nov 3, 2026', stars:5, text:'Cleared a main line backup across three units and walked us through the camera footage.', response:''},
+    {id:3, client:'Rosa\'s Taqueria', job:'Garbage disposal install', date:'Oct 30, 2026', stars:4, text:'Good work. Arrived 40 minutes after the window but called ahead to let us know.', response:''},
+    {id:4, client:'Sunrise Daycare', job:'Backflow testing', date:'Oct 28, 2026', stars:5, text:'Certificate was filed with the city the same day. Very professional.', response:'Always happy to help keep the kids safe.'},
+    {id:5, client:'Bluebonnet Salon', job:'Leak repair', date:'Oct 19, 2026', stars:3, text:'Fixed the leak, but the invoice was higher than the bid because of an extra valve.', response:'Fair point, we should have flagged the valve before starting. We\'ve refunded the difference.'},
+    {id:6, client:'Union Coffee Co.', job:'Grease interceptor replacement', date:'Jun 18, 2026', stars:5, text:'Zero downtime during service hours. Will hire again.', response:''},
+  ],
+  services:[
+    {id:1, title:'Leak detection & repair', cat:1, description:'Locate and fix leaks in supply and drain lines, including joints, valves and traps.', price:120, duration:'1-2 hrs', active:true},
+    {id:2, title:'Drain cleaning', cat:1, description:'Snaking and hydro-jetting for sinks, floor drains and main lines. Camera inspection available.', price:150, duration:'1 hr', active:true},
+    {id:3, title:'Water heater installation', cat:1, description:'Tank and tankless installs, gas or electric, with haul-away of the old unit.', price:950, duration:'4-6 hrs', active:true},
+    {id:4, title:'Commercial kitchen plumbing', cat:1, description:'Grease traps, 3-compartment sinks, pre-rinse units and floor sinks.', price:200, duration:'2-4 hrs', active:true},
+    {id:5, title:'Backflow testing & certification', cat:1, description:'Annual testing with same-day filing to the city.', price:180, duration:'1 hr', active:true},
+    {id:6, title:'Repiping', cat:1, description:'PEX or copper repipes for homes and multi-unit buildings, phased to limit shutoffs.', price:2400, duration:'2-4 days', active:false},
+  ],
+  worksites:[
+    {id:1, name:'North Austin Yard', contact:'(512) 555-0142', address:'8800 Burnet Rd, Austin, TX', about:'Main dispatch, van fleet and parts inventory.', is_active:true, status:'Operational'},
+    {id:2, name:'South Depot', contact:'(512) 555-0177', address:'4100 S Congress Ave, Austin, TX', about:'Overflow storage and south-side crew base.', is_active:true, status:'Operational'},
+    {id:3, name:'Round Rock Office', contact:'(512) 555-0190', address:'210 E Main St, Round Rock, TX', about:'Estimates and admin. Opening full crew in 2027.', is_active:false, status:'Limited'},
+  ],
+  team:[
+    {id:1, emp_name:'Daniel Reyes', role:'Owner · Master plumber', contact:'(512) 555-0101', dob:'1984-03-12', address:'1203 Alta Vista Ave, Austin', worksite:1, is_active:true},
+    {id:2, emp_name:'Maria Chen', role:'Operations manager', contact:'(512) 555-0108', dob:'1990-07-22', address:'4410 Duval St, Austin', worksite:1, is_active:true},
+    {id:3, emp_name:'Tyrone Brooks', role:'Journeyman plumber', contact:'(512) 555-0115', dob:'1993-11-02', address:'2207 E 12th St, Austin', worksite:1, is_active:true},
+    {id:4, emp_name:'Luis Ortega', role:'Journeyman plumber', contact:'(512) 555-0123', dob:'1988-05-17', address:'6012 Manchaca Rd, Austin', worksite:2, is_active:true},
+    {id:5, emp_name:'Priya Nair', role:'Apprentice', contact:'(512) 555-0131', dob:'2001-09-09', address:'9300 Anderson Mill Rd, Austin', worksite:1, is_active:true},
+    {id:6, emp_name:'Sam Whitfield', role:'Drain technician', contact:'(512) 555-0136', dob:'1995-01-28', address:'1801 W Slaughter Ln, Austin', worksite:2, is_active:true},
+    {id:7, emp_name:'Kevin O\'Hara', role:'Apprentice', contact:'(512) 555-0144', dob:'2002-04-14', address:'7100 S 1st St, Austin', worksite:2, is_active:false},
+    {id:8, emp_name:'Grace Park', role:'Estimator', contact:'(512) 555-0152', dob:'1991-12-03', address:'1500 Sam Bass Rd, Round Rock', worksite:3, is_active:true},
+    {id:9, emp_name:'Jamal Wright', role:'Service technician', contact:'(512) 555-0160', dob:'1997-06-30', address:'3100 Rundberg Ln, Austin', worksite:1, is_active:true},
+  ],
+  portfolio:[
+    {id:1, title:'Water heater replacement', client:'Elm Street Dental', tag:'Water heaters', date:'Oct 2026', stars:5, featured:true, note:'80-gal commercial unit swapped before 8am opening.'},
+    {id:2, title:'Restaurant kitchen repipe', client:'Pho Saigon', tag:'Commercial', date:'Aug 2026', stars:5, featured:false, note:'Full copper-to-PEX repipe done over two closed Mondays.'},
+    {id:3, title:'Main line camera & hydro-jet', client:'Maple Grove Apartments', tag:'Drains', date:'Nov 2026', stars:5, featured:true, note:'Root intrusion cleared across a 3-unit shared line.'},
+    {id:4, title:'Backflow preventer install', client:'Sunrise Daycare', tag:'Backflow', date:'Sep 2026', stars:5, featured:false, note:'New RPZ assembly plus city certification.'},
+    {id:5, title:'Tankless conversion', client:'Private residence, Tarrytown', tag:'Water heaters', date:'Jul 2026', stars:4, featured:false, note:'Gas line upsized; wall-mounted tankless with recirculation.'},
+    {id:6, title:'Grease interceptor replacement', client:'Union Coffee Co.', tag:'Commercial', date:'Jun 2026', stars:5, featured:true, note:'Overnight swap with zero service-hour downtime.'},
+  ],
+  // UI sub-state
+  ui:{ cTab:'all', bidSort:'low', shortlist:{}, showAllBids:false, feedCat:'all', feedQ:'', feedIncl:false, feedSort:'new',
+       bidsTab:'active', finRange:'12', txTab:'all', revTab:'all', replyOpen:null, teamSite:'all', pfTag:'All', provTab:'overview', invited:false,
+       post:null, bidForm:null },
+};
+
+// Helpers
+const $ = (s, r=document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const money = (n, d=0) => (n<0?'-':'') + '$' + Math.abs(n).toLocaleString('en-US',{minimumFractionDigits:d, maximumFractionDigits:d});
+const cat = id => CATS.find(c => c.id === id);
+const job = id => S.jobs.find(j => j.id === +id);
+const bidsFor = id => S.bids.filter(b => b.job === +id && b.status !== 'withdrawn');
+const fmtDate = d => new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'short', day:'numeric', year:'numeric'});
+const stars = (n, size=14) => `<span class="stars" role="img" aria-label="${n} out of 5 stars" style="font-size:${size}px"><span class="on">${'★'.repeat(Math.round(n))}</span><span class="off">${'★'.repeat(5-Math.round(n))}</span></span>`;
+const pill = (t, k='gray') => `<span class="pill p-${k}">${t}</span>`;
+const statusPill = s => ({active:pill('Active','green'), completed:pill('Completed','blue'), canceled:pill('Canceled','gray')}[s]);
+const ph = (label, h=140, icon='image') => `<div class="ph" style="height:${h}px">${ic(icon)}<span>${esc(label)}</span></div>`;
+const avatar = (p, size=44, sq=true) => `<div class="avatar ${sq?'av-sq':''}" style="width:${size}px;height:${size}px;background:${p.color};color:${p.fg};font-size:${Math.round(size/3)}px">${p.initials}</div>`;
+const LOGO_MARK = '<svg class="logo-mark" viewBox="0 0 1024 1024" aria-hidden="true"><rect width="1024" height="1024" rx="230" fill="url(#bylg)"/><g transform="translate(-32 -4)" fill="#fff"><path d="M328 276 A56 56 0 0 1 440 276 L440 600 L328 600 Z M328 600 L440 600 L440 800 L384 800 A56 56 0 0 1 328 744 Z"/><path fill-rule="evenodd" d="M560 400 A200 200 0 0 1 760 600 L760 772 Q760 800 732 800 L384 800 L384 600 L360 600 A200 200 0 0 1 560 400 Z M560 506 A94 94 0 1 0 560 694 A94 94 0 1 0 560 506 Z"/></g></svg>';
+const logo = () => `<button class="logo" data-act="go" data-v="welcome" aria-label="${BRAND.join('')} home">${LOGO_MARK}<span>${BRAND.join('')}</span></button>`;
+const emptyState = (title, sub='') => `<div class="card empty"><span class="empty-ic">${ic('search')}</span><h3>${title}</h3>${sub?`<span class="muted">${sub}</span>`:''}</div>`;
+const mascotTip = (text) => `<div class="tip"><span class="tip-ic">${ic('sparkle','sm')}</span><div class="bubble">${text}</div></div>`;
+const tabs = (items, cur, act) => `<div class="tabs" role="tablist">${items.map(([k,l,c]) => `<button class="tab ${cur===k?'on':''}" role="tab" aria-selected="${cur===k}" data-act="${act}" data-v="${k}">${l}${c!==undefined?`<span class="ct">${c}</span>`:''}</button>`).join('')}</div>`;
+const dobFmt = d => new Date(d+'T12:00:00').toLocaleDateString('en-US',{month:'short', day:'numeric', year:'numeric'});
+
+function toast(msg){
+  const t = document.createElement('div');
+  t.className = 'toast'; t.setAttribute('role','status');
+  t.innerHTML = `<span class="toast-ic">${ic('check','sm')}</span>` + esc(msg);
+  document.body.appendChild(t);
+  setTimeout(() => t.remove(), 2600);
+}
+function modal(html){ $('#layer').innerHTML = `<div class="overlay" data-act="closeModalBg"><div class="modal" role="dialog" aria-modal="true">${html}</div></div>`; const f = $('#layer input, #layer textarea, #layer select'); if (f) f.focus(); }
+function closeModal(){ $('#layer').innerHTML = ''; }
+
+function go(view, param=null){
+  S.view = view; S.param = param;
+  S.role = view==='welcome' ? 'welcome' : view.startsWith('p-') ? 'provider' : 'customer'; S.notifOpen=false;
+  render(); window.scrollTo(0,0);
+}
+
+// Shells
+function notifPanel(){
+  const list = S.notifs[S.role] || [];
+  return `<div class="drop" role="dialog" aria-label="Notifications">
+    <div class="row between" style="padding:6px 8px 10px"><h3>Notifications</h3><button class="btn sm" data-act="notifRead">Mark all read</button></div>
+    ${list.map(n=>`<button class="ni ${n.unread?'unread':''}"><span class="caticon" style="width:38px;height:38px;border-radius:12px;background:${n.unread?'var(--g-sun)':'var(--g-grape)'}">${ic(n.ic,'sm')}</span><span class="col grow"><span class="b">${n.t}</span><span class="small muted">${n.d}</span></span><span class="small muted">${n.ago}</span></button>`).join('')}
+  </div>`;
+}
+function bell(){
+  const unread = (S.notifs[S.role]||[]).some(n=>n.unread);
+  return `<div class="notif-wrap"><button class="iconbtn" aria-label="Notifications" aria-expanded="${S.notifOpen}" data-act="notify">${ic('bell')}${unread?'<span class="dot"></span>':''}</button>${S.notifOpen?notifPanel():''}</div>`;
+}
+function customerShell(content){
+  const nav = [['c-jobs','My jobs','briefcase'],['c-post','Post a job','plus']];
+  const curNav = ['c-job','c-provider'].includes(S.view) ? 'c-jobs' : S.view;
+  return `
+  <header class="c-header"><div class="in">
+    ${logo()}
+    <nav aria-label="Main" class="row grow wrap gap4">
+      ${nav.map(([v,l,i]) => `<button class="navl ${curNav===v?'on':''}" data-act="go" data-v="${v}">${ic(i,'sm')}${l}</button>`).join('')}
+    </nav>
+    <div class="row gap12 wrap">
+      <button class="navl small" data-act="go" data-v="p-feed">${ic('switch','sm')}Switch to provider</button>
+      <button class="iconbtn" aria-label="Messages" data-act="msg" data-p="FlowRight Plumbing">${ic('message')}</button>
+      ${bell()}
+      <div class="row gap12">
+        <div class="avatar av-ring" style="background:var(--g-coral);color:#fff">AK</div>
+        <div class="col" style="line-height:1.25"><span class="b">Amina Khan</span><span class="small muted">Harbor Street Bakery</span></div>
+      </div>
+    </div>
+  </div></header>
+  <main class="c-main">${content}</main>`;
+}
+
+function providerShell(content){
+  const nav = [['p-feed','Find jobs','search'],['p-bids','My bids','send'],['p-fin','Finances','wallet'],['p-reviews','Reviews','star'],['p-services','Services','layers'],['p-team','Team','users'],['p-portfolio','Portfolio','grid']];
+  const cur = S.view === 'p-job' ? 'p-feed' : S.view;
+  const activeBids = S.bids.filter(b => b.provider===ME && b.status==='pending').length;
+  const links = nav.map(([v,l,i]) => `<button class="sidel ${cur===v?'on':''}" data-act="go" data-v="${v}">${ic(i)}<span>${l}</span>${v==='p-bids'?`<span class="bdg">${activeBids}</span>`:''}</button>`).join('');
+  return `
+  <div class="p-shell">
+    <aside class="side">
+      <div style="padding:0 6px;position:relative">${logo()}</div>
+      <div class="row gap12" style="padding:10px;border-radius:12px;background:#fff;border:1px solid var(--border)">
+        <div class="avatar av-sq" style="background:var(--g-sun);color:#fff">FR</div>
+        <div class="col" style="line-height:1.3;min-width:0"><span class="b">FlowRight Plumbing</span><span class="small muted">Daniel Reyes</span></div>
+      </div>
+      <nav aria-label="Provider" class="col" style="gap:3px;position:relative">${links}</nav>
+      <div class="side-tip" style="margin-top:auto">
+        <div class="b" style="color:var(--ink);font-size:13.5px;margin-bottom:4px">Pro tip</div>
+        Complete your portfolio to show up higher in client searches.
+        <button class="btn sm primary" style="margin-top:10px;width:100%" data-act="go" data-v="p-portfolio">Finish profile</button>
+      </div>
+      <div style="padding-top:12px;border-top:1px solid var(--border)">
+        <button class="sidel" data-act="go" data-v="c-jobs">${ic('switch')}<span>Switch to client</span></button>
+      </div>
+    </aside>
+    <div class="p-top">${logo()}${links}<button class="sidel" data-act="go" data-v="c-jobs">${ic('switch')}<span>Client</span></button></div>
+    <main class="p-main">
+      <div class="p-topbar">
+        <button class="iconbtn" aria-label="Messages" data-act="msg" data-p="Harbor Street Bakery">${ic('message')}</button>
+        ${bell()}
+        <div class="avatar av-ring" style="background:var(--g-grape);color:#fff">DR</div>
+      </div>
+      ${content}
+    </main>
+  </div>`;
+}
+
+// Customer: my jobs
+function vCustomerJobs(){
+  const mine = S.jobs.filter(j => j.client === MY_CLIENT);
+  const cnt = s => mine.filter(j => j.status === s).length;
+  const t = S.ui.cTab;
+  const list = mine.filter(j => t === 'all' || j.status === t);
+  const bidsRecv = mine.filter(j=>j.status==='active').reduce((a,j)=>a+bidsFor(j.id).length,0);
+  const spent = mine.reduce((a,j)=>a+(j.paid||0),0);
+  return `
+  <section class="hero">
+    <div class="hero-content">
+      <span class="eyebrow">Harbor Street Bakery · Austin, TX</span>
+      <h1>Good evening, Amina.</h1>
+      <span class="sub">You have ${bidsRecv} bids waiting on your active jobs. Compare them side by side and hire when you're ready.</span>
+      <div class="row wrap gap12" style="margin-top:8px"><button class="btn dark" data-act="go" data-v="c-post">${ic('plus','sm')}Post a new job</button><button class="btn glass" data-act="go" data-v="c-job" data-p="1042">Review bids ${ic('chevR','sm')}</button></div>
+    </div>
+    ${heroBids()}
+  </section>
+  <div class="grid g4 stagger" style="margin-bottom:28px">
+    ${[['Active jobs',cnt('active'),'briefcase','var(--g-grape)',''],['Bids received',bidsRecv,'send','var(--g-sun)',''],['Completed',cnt('completed'),'check','var(--g-leaf)',''],['Total spent',spent,'wallet','var(--g-coral)','$']].map(([l,v,i,g,pre])=>`
+      <div class="card pad stat" style="--bg:${g}"><div class="row between"><span class="label">${l}</span><span class="bub" style="background:${g}">${ic(i)}</span></div><div class="v" data-count="${v}" data-pre="${pre}">${pre}${v.toLocaleString('en-US')}</div></div>`).join('')}
+  </div>
+  <div class="row between wrap gap12" style="margin-bottom:16px">
+    ${tabs([['all','All',mine.length],['active','Active',cnt('active')],['completed','Completed',cnt('completed')],['canceled','Canceled',cnt('canceled')]], t, 'cTab')}
+  </div>
+  <div class="col gap12 stagger">
+    ${list.length ? list.map(customerJobCard).join('') : emptyState('Nothing here yet','Post a job and pros will start bidding within minutes.')}
+  </div>`;
+}
+
+function heroBids(){
+  const bs = bidsFor(1042).slice().sort((a,b)=>a.amount-b.amount).slice(0,3);
+  return `<div class="hero-side card"><div class="row between"><span class="small b">Leak repair</span><span class="small muted">Lowest bids</span></div>
+    ${bs.map(b=>{ const p=PROVIDERS[b.provider]; return `<div class="row gap12" style="padding:8px 0;border-top:1px solid var(--border)">${avatar(p,30)}<div class="col grow" style="line-height:1.25"><span class="small b">${p.name}</span><span class="small muted">${p.rating.toFixed(1)} rating</span></div><span class="b">${money(b.amount)}</span></div>`; }).join('')}
+  </div>`;
+}
+function heroMatch(){
+  const j = job(1042), c = cat(j.cat);
+  return `<div class="hero-side card"><div class="row gap12"><div class="caticon" style="width:36px;height:36px;background:${c.g}">${ic(c.icon,'sm')}</div><div class="col" style="line-height:1.25"><span class="small b">Closest match</span><span class="small muted">${j.dist} away</span></div></div>
+    <div class="b" style="margin-top:10px">${j.sub} · ${j.property_type}</div><div class="small muted">${CLIENTS[j.client].name}</div>
+    <div class="row between" style="margin-top:10px"><span class="b">${money(j.min_price)} to ${money(j.price_max)}</span><button class="btn sm primary" data-act="go" data-v="p-job" data-p="1042">Bid</button></div>
+  </div>`;
+}
+function customerJobCard(j){
+  const c = cat(j.cat), nb = bidsFor(j.id).length;
+  let right = '';
+  if (j.status === 'active'){
+    const hired = S.bids.find(b => b.job===j.id && b.is_won);
+    right = hired
+      ? `<div class="small muted">Hired</div><div class="b">${PROVIDERS[hired.provider].name}</div><button class="btn sm" data-act="go" data-v="c-job" data-p="${j.id}">View job</button>`
+      : `<div class="row" style="justify-content:flex-end">${bidsFor(j.id).slice(0,3).map(b=>avatar(PROVIDERS[b.provider],28,false)).join('')}</div>
+         <div class="b">${nb} bid${nb!==1?'s':''}</div>
+         <button class="btn sm primary" data-act="go" data-v="c-job" data-p="${j.id}">Review bids ${ic('chevR','sm')}</button>`;
+  } else if (j.status === 'completed'){
+    const p = PROVIDERS[j.hired];
+    right = `<div class="small muted">Done by</div><div class="b">${p.name}</div><div class="small">Paid ${money(j.paid)}</div>` +
+      (j.review ? `<div>${stars(j.review.stars)}</div>` : `<button class="btn sm" data-act="reviewOpen" data-p="${j.id}">${ic('star','sm')}Leave review</button>`);
+  } else {
+    right = `<button class="btn sm" data-act="repost" data-p="${j.id}">Repost job</button>`;
+  }
+  return `
+  <article class="card jobcard">
+    <div class="caticon" style="background:${c.g}">${ic(c.icon)}</div>
+    <div class="grow col gap4">
+      <div class="row wrap gap12"><span class="small muted b">#J-${j.id}</span><span class="small muted">${c.category} › ${j.sub}</span>${statusPill(j.status)}${j.isInclusive?pill('Parts included','amber'):''}</div>
+      <h3 style="font-size:18px">${j.sub}</h3>
+      <p style="margin:0 0 6px;color:var(--muted)">${esc(j.problem)}</p>
+      <div class="meta">
+        <span>${ic('pin','sm')}${esc(j.address)}</span>
+        <span>${ic('building','sm')}${j.property_type}</span>
+        <span>${ic('calendar','sm')}${fmtDate(j.date)}</span>
+        <span>${ic('tag','sm')}${money(j.min_price)} to ${money(j.price_max)}</span>
+        ${j.images?`<span>${ic('image','sm')}${j.images} photos</span>`:''}
+      </div>
+      ${j.review && j.review.response ? `<div style="margin-top:8px;padding:10px 12px;background:var(--ground);border-radius:10px" class="small"><span class="b">Your review:</span> “${esc(j.review.text)}” <br><span class="b">${PROVIDERS[j.hired].name} replied:</span> ${esc(j.review.response)}</div>`:''}
+    </div>
+    <div class="col gap4" style="align-items:flex-end;text-align:right;min-width:160px">${right}</div>
+  </article>`;
+}
+
+function reviewModal(id){
+  const j = job(id), p = PROVIDERS[j.hired];
+  S.ui.rv = {id, stars:0};
+  modal(`
+    <div class="row between" style="margin-bottom:12px"><h2>Review ${p.name}</h2><button class="iconbtn" aria-label="Close" data-act="closeModal">${ic('x')}</button></div>
+    <p class="muted" style="margin-top:0">#J-${j.id} · ${j.sub} · Paid ${money(j.paid)}</p>
+    <div class="field"><label>Rating</label><div class="row" id="starRow">${[1,2,3,4,5].map(n=>`<button class="starbtn" aria-label="${n} star${n>1?'s':''}" data-act="rvStar" data-v="${n}">★</button>`).join('')}</div></div>
+    <div class="field" style="margin-top:14px"><label for="rvText">Your review</label><textarea id="rvText" class="input" placeholder="How did the job go? Was it on time and on budget?"></textarea></div>
+    <div id="rvWarn" class="warn" style="margin-top:8px"></div>
+    <div class="row" style="justify-content:flex-end;margin-top:18px;gap:10px"><button class="btn" data-act="closeModal">Cancel</button><button class="btn primary" data-act="rvSubmit">Submit review</button></div>`);
+}
+
+// Customer: post a job
+function newPost(){ return {step:1, cat:null, sub:null, problem:'', property:'', address:'214 Harbor St, Austin, TX 78701', date:'', min:'', max:'', inclusive:false, images:0, posted:null}; }
+
+function vCustomerPost(){
+  const P = S.ui.post || (S.ui.post = newPost());
+  if (P.posted) return `
+    <div class="card pad24" style="max-width:640px;margin:40px auto;text-align:center">
+      <div style="width:64px;height:64px;border-radius:50%;background:#34C759;color:#fff;display:flex;align-items:center;justify-content:center;margin:0 auto 14px">${ic('check')}</div>
+      <h1 style="font-size:28px">Job #J-${P.posted} is live</h1>
+      <p class="muted">Service providers near ${esc(P.address.split(',').slice(-2).join(',').trim())} can now see it and send bids. You'll be notified as bids arrive.</p>
+      <div class="row" style="justify-content:center;gap:10px;margin-top:20px;flex-wrap:wrap">
+        <button class="btn" data-act="postAnother">Post another</button>
+        <button class="btn" data-act="go" data-v="p-feed">${ic('eye','sm')}See it in provider feed</button>
+        <button class="btn primary" data-act="go" data-v="c-jobs">Go to my jobs</button>
+      </div>
+    </div>`;
+  const steps = ['Service','Job details','Budget & date','Review'];
+  const canNext = (P.step===1 && P.cat && P.sub) || (P.step===2 && P.problem.trim().length>9 && P.property && P.address.trim()) || (P.step===3 && P.date && +P.min>0 && +P.max>=+P.min) || P.step===4;
+  let body = '';
+  if (P.step === 1){
+    const c = P.cat && cat(P.cat);
+    body = `<h2>What do you need done?</h2><p class="muted" style="margin-top:4px">Pick a category and the closest sub-category.</p>
+      <div class="grid g4 stagger" style="margin-top:16px">${CATS.map(c=>`<button class="catbtn ${P.cat===c.id?'on':''}" data-act="pCat" data-v="${c.id}" aria-pressed="${P.cat===c.id}"><span class="caticon" style="width:42px;height:42px;background:${c.g}">${ic(c.icon)}</span>${c.category}</button>`).join('')}</div>
+      ${c?`<div class="field" style="margin-top:20px"><label>Sub-category</label><div class="row wrap">${c.subs.map(s=>`<button class="chip ${P.sub===s?'on':''}" data-act="pSub" data-v="${esc(s)}" aria-pressed="${P.sub===s}">${s}</button>`).join('')}</div></div>`:''}`;
+  } else if (P.step === 2){
+    body = `<h2>Describe the job</h2><p class="muted" style="margin-top:4px">Clear details get more accurate bids.</p>
+      <div class="col gap16" style="margin-top:16px">
+        <div class="field"><label for="pProblem">Problem statement</label><textarea id="pProblem" class="input" data-bind="post.problem" placeholder="e.g. Water leaking under the kitchen sink, the pipe joint looks corroded...">${esc(P.problem)}</textarea><span class="hint">At least 10 characters.</span></div>
+        <div class="field"><label>Property type</label><div class="row wrap">${PROPERTY_TYPES.map(t=>`<button class="chip ${P.property===t?'on':''}" data-act="pProp" data-v="${t}" aria-pressed="${P.property===t}">${t}</button>`).join('')}</div></div>
+        <div class="field"><label for="pAddr">Address</label><input id="pAddr" class="input" data-bind="post.address" value="${esc(P.address)}"></div>
+        <div class="field"><label>Photos</label>
+          <div class="grid g4">
+            ${Array.from({length:P.images}).map((_,i)=>ph('Photo '+(i+1),100)).join('')}
+            ${P.images<4?`<button class="ph" style="height:100px;cursor:pointer;border-color:var(--primary);color:var(--primary-d);background:var(--primary-s)" data-act="pImg">${ic('upload')}<span class="b">Add photo</span></button>`:''}
+          </div></div>
+      </div>`;
+  } else if (P.step === 3){
+    const bad = P.min && P.max && +P.max < +P.min;
+    body = `<h2>Budget and timing</h2><p class="muted" style="margin-top:4px">Providers bid within or near your range.</p>
+      <div class="col gap16" style="margin-top:16px">
+        <div class="field" style="max-width:280px"><label for="pDate">Preferred work date</label><input id="pDate" type="date" class="input" data-bind="post.date" data-rerender="summary" value="${P.date}" min="2026-11-08"></div>
+        <div class="grid g2" style="max-width:520px">
+          <div class="field"><label for="pMin">Minimum price ($)</label><input id="pMin" type="number" min="0" class="input" data-bind="post.min" data-rerender="summary" value="${P.min}" placeholder="150"></div>
+          <div class="field"><label for="pMax">Up to ($)</label><input id="pMax" type="number" min="0" class="input" data-bind="post.max" data-rerender="summary" value="${P.max}" placeholder="300"></div>
+        </div>
+        ${bad?`<span class="warn">The upper price must be at least the minimum.</span>`:''}
+        <div class="row gap12" style="padding:14px;border:1px solid var(--border);border-radius:12px;max-width:520px">
+          <button class="switch ${P.inclusive?'on':''}" role="switch" aria-checked="${P.inclusive}" aria-label="Parts and materials included" data-act="pIncl"></button>
+          <div class="col"><span class="b">Parts & materials included</span><span class="small muted">Bids should include all parts, not just labor.</span></div>
+        </div>
+      </div>`;
+  } else {
+    const c = cat(P.cat);
+    body = `<h2>Review and post</h2><p class="muted" style="margin-top:4px">Check everything before going live.</p>
+      <div class="col" style="margin-top:12px">
+        ${[['Service',`${c.category} › ${P.sub}`],['Problem',esc(P.problem)],['Property type',P.property],['Address',esc(P.address)],['Photos',P.images+' attached'],['Preferred date',fmtDate(P.date)],['Budget',`${money(+P.min)} to ${money(+P.max)}`],['Parts included',P.inclusive?'Yes':'No']].map(([k,v])=>`<div class="sum-row"><span class="muted">${k}</span><span class="b" style="text-align:right;max-width:65%">${v}</span></div>`).join('')}
+      </div>`;
+  }
+  return `
+  <button class="crumb" data-act="go" data-v="c-jobs">${ic('chevL','sm')}My jobs</button>
+  <h1 style="margin:6px 0 24px">Post a job</h1>
+  <div class="split split3">
+    <nav class="stepper card" style="padding:10px" aria-label="Steps">
+      ${steps.map((s,i)=>`<button class="step ${P.step===i+1?'on':P.step>i+1?'done':''}" ${P.step>i+1?`data-act="pStep" data-v="${i+1}"`:''}><span class="n">${P.step>i+1?ic('check','sm'):i+1}</span>${s}</button>`).join('')}
+    </nav>
+    <section class="card pad24">
+      ${body}
+      <div class="row between" style="margin-top:28px;border-top:1px solid var(--border);padding-top:18px">
+        ${P.step>1?`<button class="btn" data-act="pBack">${ic('chevL','sm')}Back</button>`:'<span></span>'}
+        ${P.step<4?`<button class="btn primary" data-act="pNext" ${canNext?'':'disabled'}>Continue ${ic('chevR','sm')}</button>`:`<button class="btn primary" data-act="pPost">${ic('send','sm')}Post job</button>`}
+      </div>
+    </section>
+    <aside class="col gap16">${mascotTip(['Pick the closest match so the right pros see your job.','Photos and clear details get you up to 2x more accurate bids.','A realistic range attracts top-rated pros. Parts included? Say so!','Looks great! Hit post and I\'ll ping pros nearby.'][P.step-1])}<div class="card pad" id="summary">${postSummary()}</div></aside>
+  </div>`;
+}
+function postSummary(){
+  const P = S.ui.post, c = P.cat && cat(P.cat);
+  return `<span class="label">Live preview</span>
+    <div class="row gap12" style="margin:12px 0"><div class="caticon" style="background:${c?c.g:'var(--g-sun)'}">${ic(c?c.icon:'briefcase')}</div><div class="col"><span class="b">${P.sub||'Untitled job'}</span><span class="small muted">${c?c.category:'No category yet'}</span></div></div>
+    <p class="small muted" style="margin:0 0 10px">${esc(P.problem)||'Your problem statement will show here.'}</p>
+    <div class="col gap4 small">
+      <span class="row">${ic('building','sm')}${P.property||'-'}</span>
+      <span class="row">${ic('calendar','sm')}${P.date?fmtDate(P.date):'-'}</span>
+      <span class="row">${ic('tag','sm')}${P.min?money(+P.min):'-'} to ${P.max?money(+P.max):'-'}</span>
+      ${P.inclusive?`<span>${pill('Parts included','amber')}</span>`:''}
+    </div>`;
+}
+
+// Customer: job detail and bids
+function vCustomerJob(){
+  const j = job(S.param) || job(1042); const c = cat(j.cat);
+  let bids = bidsFor(j.id).map(b => ({...b, p:PROVIDERS[b.provider]}));
+  const sort = S.ui.bidSort;
+  bids.sort((a,b) => sort==='low' ? a.amount-b.amount : sort==='rated' ? b.p.rating-a.p.rating : b.id-a.id);
+  const won = bids.find(b => b.is_won);
+  const shown = S.ui.showAllBids ? bids : bids.slice(0,5);
+  const avg = bids.length ? bids.reduce((a,b)=>a+b.amount,0)/bids.length : 0;
+  return `
+  <button class="crumb" data-act="go" data-v="c-jobs">${ic('chevL','sm')}My jobs</button>
+  <div class="row between wrap gap16" style="margin:6px 0 20px">
+    <div class="col gap4"><div class="row wrap gap12"><span class="muted b">#J-${j.id}</span>${statusPill(j.status)}${j.isInclusive?pill('Parts included','amber'):''}</div><h1>${c.category} · ${j.sub}</h1></div>
+    ${j.status==='active'?`<div class="row gap12"><button class="btn" data-act="go" data-v="c-post">${ic('edit','sm')}Edit</button><button class="btn danger" data-act="cancelJob" data-p="${j.id}">${ic('x','sm')}Cancel job</button></div>`:''}
+  </div>
+  ${tracker(j, bids, won)}
+  ${j.status==='canceled'?`<div class="banner bad" style="margin-bottom:16px">${ic('x')}This job was canceled. Providers can no longer bid.</div>`:''}
+  ${won?`<div class="banner ok" style="margin-bottom:16px">${ic('check')}You hired <b>${won.p.name}</b> for ${money(won.amount)}. A contract has been created and they've been notified.</div>`:''}
+  <div class="split-l split-job">
+    <section class="card pad24 col gap16">
+      <h2>Job details</h2>
+      <div class="grid g3" style="gap:10px">${j.images?Array.from({length:Math.min(j.images,3)}).map((_,i)=>ph('Photo '+(i+1),96)).join(''):ph('No photos',96)}</div>
+      <div><span class="label">Problem statement</span><p style="margin:6px 0 0">${esc(j.problem)}</p></div>
+      <div class="col">
+        ${[['Category',`${c.category} › ${j.sub}`],['Property type',j.property_type],['Address',esc(j.address)],['Preferred date',fmtDate(j.date)],['Minimum price',money(j.min_price)],['Price range',`${money(j.min_price)} to ${money(j.price_max)}`],['Parts included',j.isInclusive?'Yes':'No'],['Posted',j.posted]].map(([k,v])=>`<div class="sum-row"><span class="muted">${k}</span><span class="b" style="text-align:right">${v}</span></div>`).join('')}
+      </div>
+      ${bids.length?`<div class="grid g2" style="gap:10px"><div class="card pad" style="background:var(--ground)"><span class="label">Bids</span><div class="b" style="font-size:22px">${bids.length}</div></div><div class="card pad" style="background:var(--ground)"><span class="label">Average bid</span><div class="b" style="font-size:22px">${money(avg)}</div></div></div>`:''}
+    </section>
+    <section class="col gap12">
+      <div class="row between wrap gap12"><h2>Bids from service providers (${bids.length})</h2>
+        ${tabs([['low','Lowest price'],['rated','Top rated'],['new','Newest']], sort, 'bidSort')}
+      </div>
+      <div class="col gap12 stagger">${shown.length? shown.map(b => bidCard(b, j, won)).join('') : emptyState('No bids yet','Pros usually reply quickly. Check back soon.')}</div>
+      ${bids.length>5?`<button class="btn" data-act="toggleAllBids">${S.ui.showAllBids?'Show fewer':`Show ${bids.length-5} more bids`}</button>`:''}
+    </section>
+  </div>
+  ${S.compare.length?`<div class="cmpbar"><span class="b">${S.compare.length} bid${S.compare.length>1?'s':''} selected</span><button class="btn sm" style="background:transparent;color:#fff;border-color:rgba(255,255,255,.3)" data-act="cmpClear">Clear</button><button class="btn sm primary" data-act="cmpOpen" ${S.compare.length<2?'disabled':''}>Compare</button></div>`:''}`;
+}
+function tracker(j, bids, won){
+  if (j.status==='canceled') return '';
+  const st = j.status==='completed' ? 4 : won ? 3 : bids.length ? 2 : 1;
+  const steps = ['Posted','Receiving bids','Pro hired','Completed'];
+  return `<div class="card pad tracker" style="padding:18px 24px">${steps.map((t,i)=>`${i?`<div class="ln ${st>i?'done':''}"></div>`:''}<div class="t ${st>i+1?'done':st===i+1?'cur':''}"><span class="c">${st>i+1?ic('check','sm'):i+1}</span>${t}</div>`).join('')}</div>`;
+}
+function bidCard(b, j, won){
+  const p = b.p, sl = S.ui.shortlist[b.id];
+  const lost = won && !b.is_won;
+  return `
+  <article class="card pad" style="${b.is_won?'border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)':''}${lost?';opacity:.6':''}">
+    <div class="row gap12" style="align-items:flex-start">
+      ${avatar(p,48)}
+      <div class="grow col gap4">
+        <div class="row wrap gap12"><span class="b" style="font-size:15px">${p.name}</span>${p.verified?`<span class="pill p-green">${ic('shield','sm')}Verified</span>`:''}${b.provider===ME?pill('Your bid','blue'):''}${sl?pill('Shortlisted','amber'):''}${b.is_won?pill('Hired','green'):''}${lost?pill('Not selected','gray'):''}</div>
+        <div class="meta"><span>${stars(p.rating,13)} <b style="color:var(--ink)">${p.rating.toFixed(1)}</b> (${p.reviews})</span><span>${ic('briefcase','sm')}${p.jobs} jobs done</span><span>${ic('clock','sm')}${b.duration}</span><span>${ic('message','sm')}Replies ${p.response}</span></div>
+      </div>
+      <div class="col" style="align-items:flex-end"><span class="gtext-grape" style="font-family:var(--head);font-size:26px;font-weight:700">${money(b.amount)}</span><span class="small muted">${j.isInclusive?'incl. parts':'proposed'}</span></div>
+    </div>
+    <p style="margin:12px 0 14px">${esc(b.description)}</p>
+    <div class="row wrap gap12">
+      <button class="btn sm" data-act="go" data-v="c-provider" data-p="${b.provider}">${ic('eye','sm')}View profile</button>
+      ${!won && j.status==='active'?`<label class="cbx"><input type="checkbox" data-act="cmpToggle" data-p="${b.id}" ${S.compare.includes(b.id)?'checked':''}>Compare</label><button class="btn sm" data-act="shortlist" data-p="${b.id}">${ic('bookmark','sm')}${sl?'Remove from shortlist':'Shortlist'}</button>
+      <button class="btn sm" data-act="msg" data-p="${p.name}">${ic('message','sm')}Message</button>
+      <button class="btn sm primary" data-act="acceptBid" data-p="${b.id}" style="margin-left:auto">${ic('check','sm')}Accept bid</button>`:''}
+    </div>
+  </article>`;
+}
+
+// Customer: view provider profile
+function vCustomerProvider(){
+  const pid = S.param || 'p1', p = PROVIDERS[pid], isMe = pid === ME;
+  const t = S.ui.provTab;
+  const svc = isMe ? S.services.filter(s=>s.active) : [{title:'General plumbing repair',description:'Leaks, fixtures, valves and drains.',price:110,duration:'1-2 hrs'},{title:'Commercial service',description:'Restaurants, retail and offices.',price:180,duration:'2-4 hrs'}];
+  const revs = isMe ? S.reviews : [{client:'Local business',job:'Plumbing repair',date:'Oct 2026',stars:5,text:'Quick and tidy work.',response:''}];
+  const pf = isMe ? S.portfolio : [];
+  const teamN = isMe ? S.team.filter(m=>m.is_active).length : 4;
+  let body = '';
+  if (t==='overview') body = `
+    <div class="split-l">
+      <div class="col gap16">
+        <div class="card pad24"><h2>About</h2><p style="margin:8px 0 0">${isMe?'FlowRight Plumbing is a licensed plumbing contractor serving Austin and Williamson County since 2012. We focus on restaurants, clinics and multi-unit buildings, with crews dispatched from two yards so we can reach most of the metro within an hour.':esc(p.tagline)+'.'}</p></div>
+        <div class="card pad24"><div class="row between"><h2>Featured work</h2><button class="btn sm" data-act="provTab" data-v="portfolio">See all</button></div>
+          <div class="grid g3" style="margin-top:14px">${(pf.filter(x=>x.featured).length?pf.filter(x=>x.featured):[{title:'Project photo',client:''},{title:'Project photo',client:''},{title:'Project photo',client:''}]).slice(0,3).map(x=>`<div class="col gap4">${ph(x.title,110)}<span class="small b">${esc(x.title)}</span><span class="small muted">${esc(x.client)}</span></div>`).join('')}</div></div>
+      </div>
+      <div class="col gap16">
+        <div class="card pad24 col gap12"><h2>At a glance</h2>
+          ${[['Jobs completed',p.jobs],['Rating',`${p.rating.toFixed(1)} (${p.reviews} reviews)`],['Response time',p.response],['Team size',teamN+' active'],['On Bidyard since',p.since]].map(([k,v])=>`<div class="sum-row"><span class="muted">${k}</span><span class="b">${v}</span></div>`).join('')}
+        </div>
+        ${isMe?`<div class="card pad24"><h2>Worksites</h2><div class="col gap12" style="margin-top:12px">${S.worksites.filter(w=>w.is_active).map(w=>`<div class="row gap12" style="align-items:flex-start">${ic('pin')}<div class="col"><span class="b">${w.name}</span><span class="small muted">${w.address}</span></div></div>`).join('')}</div></div>`:''}
+      </div>
+    </div>`;
+  if (t==='services') body = `<div class="grid g3 stagger">${svc.map(s=>`<div class="card pad col gap12 lift">${ph(s.title,120)}<span class="b">${esc(s.title)}</span><span class="small muted">${esc(s.description)}</span><div class="row between"><span class="b">From ${money(s.price)}</span><span class="small muted">${ic('clock','sm')} ${s.duration}</span></div></div>`).join('')}</div>`;
+  if (t==='portfolio') body = pf.length?`<div class="grid g3 stagger">${pf.map(x=>`<div class="card pad col gap12 lift">${ph(x.title,150)}<div class="row between"><span class="b">${esc(x.title)}</span>${stars(x.stars,12)}</div><span class="small muted">${esc(x.client)} · ${x.date}</span><span class="small">${esc(x.note)}</span></div>`).join('')}</div>`:`<div class="card pad24 muted">No portfolio items yet.</div>`;
+  if (t==='reviews') body = `<div class="col gap12">${revs.map(r=>`<div class="card pad"><div class="row between wrap"><span class="b">${esc(r.client)}</span>${stars(r.stars)}</div><div class="small muted">${esc(r.job)} · ${r.date}</div><p style="margin:8px 0 0">${esc(r.text)}</p>${r.response?`<div class="small" style="margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--ground)"><b>Response from ${p.name}:</b> ${esc(r.response)}</div>`:''}</div>`).join('')}</div>`;
+  return `
+  <button class="crumb" data-act="back">${ic('chevL','sm')}Back to bids</button>
+  <div class="card" style="margin:8px 0 20px;overflow:hidden">
+    <div style="height:160px;background:linear-gradient(180deg,#FFF9DB,#F5F5F7);position:relative;overflow:hidden"><div style="position:absolute;width:300px;height:300px;border-radius:50%;background:rgba(255,210,63,.35);right:-60px;top:-150px"></div><div style="position:absolute;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.12);left:30%;bottom:-120px"></div></div>
+    <div class="pad24 row wrap gap16" style="align-items:flex-end;margin-top:-56px">
+      <div style="border:4px solid #fff;border-radius:22px;box-shadow:var(--sh-md);position:relative">${avatar(p,88)}</div>
+      <div class="grow col gap4" style="padding-top:56px">
+        <div class="row wrap gap12"><h1 style="font-size:26px">${p.name}</h1>${p.verified?`<span class="pill p-green">${ic('shield','sm')}Verified</span>`:''}</div>
+        <div class="meta"><span>${p.tagline}</span><span>${ic('pin','sm')}${p.loc}</span><span>${stars(p.rating,13)} <b style="color:var(--ink)">${p.rating.toFixed(1)}</b> (${p.reviews} reviews)</span><span>${ic('briefcase','sm')}${p.jobs} jobs</span></div>
+      </div>
+      <div class="row gap12"><button class="btn" data-act="msg" data-p="${p.name}">${ic('message','sm')}Message</button><button class="btn primary" data-act="invite">${S.ui.invited?ic('check','sm')+'Invited':ic('send','sm')+'Invite to a job'}</button></div>
+    </div>
+  </div>
+  <div style="margin-bottom:16px">${tabs([['overview','Overview'],['services','Services',svc.length],['portfolio','Portfolio',pf.length],['reviews','Reviews',revs.length]], t, 'provTab')}</div>
+  ${body}`;
+}
+
+// Provider: jobs feed
+function feedList(){
+  const u = S.ui, q = u.feedQ.trim().toLowerCase();
+  let list = S.jobs.filter(j => j.status==='active' && j.is_active)
+    .filter(j => u.feedCat==='all' || j.cat === +u.feedCat)
+    .filter(j => !u.feedIncl || j.isInclusive)
+    .filter(j => !q || (j.sub+' '+j.problem+' '+cat(j.cat).category+' '+CLIENTS[j.client].name).toLowerCase().includes(q));
+  if (u.feedSort==='budget') list.sort((a,b)=>b.price_max-a.price_max);
+  else if (u.feedSort==='bids') list.sort((a,b)=>bidsFor(a.id).length-bidsFor(b.id).length);
+  else list.sort((a,b)=>b.id-a.id);
+  if (!list.length) return emptyState('No jobs match these filters','Try another category or clear the search.');
+  return list.map(j => {
+    const c = cat(j.cat), cl = CLIENTS[j.client], n = bidsFor(j.id).length;
+    const mine = S.bids.find(b=>b.job===j.id && b.provider===ME && b.status!=='withdrawn');
+    const sv = S.saved[j.id];
+    return `
+    <article class="card jobcard">
+      <div class="caticon" style="background:${c.g}">${ic(c.icon)}</div>
+      <div class="grow col gap4">
+        <div class="row wrap gap12"><span class="small muted">${c.category} › ${j.sub}</span><span class="small muted">· Posted ${j.posted}</span>${j.isInclusive?pill('Parts included','amber'):''}${mine?pill('Bid sent · '+money(mine.amount),'blue'):''}</div>
+        <button class="b" style="all:unset;cursor:pointer;font-family:var(--head);font-size:18px;font-weight:600" data-act="go" data-v="p-job" data-p="${j.id}">${j.sub} · ${j.property_type}</button>
+        <p style="margin:0 0 6px;color:var(--muted)">${esc(j.problem)}</p>
+        <div class="meta">
+          <span>${ic('building','sm')}${cl.name}</span>
+          <span>${ic('pin','sm')}${cl.location} · ${j.dist}</span>
+          <span>${ic('calendar','sm')}${fmtDate(j.date)}</span>
+          <span>${ic('send','sm')}${n} bid${n!==1?'s':''}</span>
+        </div>
+      </div>
+      <div class="col gap4" style="align-items:flex-end;text-align:right;min-width:170px">
+        <span class="small muted">Budget</span>
+        <span style="font-family:var(--head);font-size:19px;font-weight:600;white-space:nowrap;letter-spacing:-.01em">${money(j.min_price)} to ${money(j.price_max)}</span>
+        <span class="small muted">Min ${money(j.min_price)}</span>
+        <div class="row" style="margin-top:6px">
+          <button class="iconbtn" aria-label="${sv?'Unsave job':'Save job'}" aria-pressed="${!!sv}" data-act="saveJob" data-p="${j.id}" style="${sv?'color:var(--primary);border-color:var(--primary);background:var(--primary-s)':''}">${ic('bookmark')}</button>
+          <button class="btn primary" data-act="go" data-v="p-job" data-p="${j.id}">${mine?'View bid':'Bid now'}</button>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+function vProviderFeed(){
+  const u = S.ui;
+  const myActive = S.bids.filter(b=>b.provider===ME && b.status==='pending').length;
+  return `
+  <section class="hero grape">
+    <div class="hero-content">
+      <span class="eyebrow" style="color:var(--primary)">Good evening, Daniel</span>
+      <h1>${S.jobs.filter(j=>j.status==='active'&&j.is_active&&j.cat===1).length} new plumbing jobs near you.</h1>
+      <span class="sub">These match the services on your profile. Clients see bids in the order they arrive.</span>
+      <div class="row wrap gap12" style="margin-top:8px"><button class="btn primary" data-act="feedCat" data-v="1">${ic('search','sm')}Show my matches</button><button class="btn glass" data-act="go" data-v="p-portfolio">${ic('eye','sm')}My public profile</button></div>
+    </div>
+    ${heroMatch()}
+  </section>
+  <div class="split">
+    <section class="col gap16">
+      <div class="card pad col gap12">
+        <div class="row gap12 wrap">
+          <div class="grow" style="position:relative;min-width:220px"><span style="position:absolute;left:14px;top:13px" class="muted">${ic('search','sm')}</span><input class="input" style="padding-left:40px" placeholder="Search jobs, clients, keywords" aria-label="Search jobs" data-bind="ui.feedQ" data-rerender="feedList" value="${esc(u.feedQ)}"></div>
+          <select class="input" style="width:auto" aria-label="Sort" data-bind="ui.feedSort" data-rerender="feedList">
+            <option value="new" ${u.feedSort==='new'?'selected':''}>Newest first</option>
+            <option value="budget" ${u.feedSort==='budget'?'selected':''}>Highest budget</option>
+            <option value="bids" ${u.feedSort==='bids'?'selected':''}>Fewest bids</option>
+          </select>
+          <div class="row gap12"><button class="switch ${u.feedIncl?'on':''}" role="switch" aria-checked="${u.feedIncl}" aria-label="Parts included only" data-act="feedIncl"></button><span class="small b">Parts-inclusive only</span></div>
+        </div>
+        <div class="row wrap">${[['all','All']].concat(CATS.map(c=>[String(c.id),c.category])).map(([k,l])=>`<button class="chip ${String(u.feedCat)===k?'on':''}" data-act="feedCat" data-v="${k}" aria-pressed="${String(u.feedCat)===k}">${l}</button>`).join('')}</div>
+      </div>
+      <div id="feedList" class="col gap12 stagger">${feedList()}</div>
+    </section>
+    <aside class="col gap16">
+      <div class="card pad24 col gap12">
+        <h2>Your bidding</h2>
+        <div class="grid g2" style="gap:10px">
+          <div class="card pad" style="background:var(--ground)"><span class="label">Active bids</span><div class="b" style="font-size:22px">${myActive}</div></div>
+          <div class="card pad" style="background:var(--ground)"><span class="label">Win rate</span><div class="b" style="font-size:22px">33%</div></div>
+        </div>
+        <button class="btn" data-act="go" data-v="p-bids">View my bids ${ic('chevR','sm')}</button>
+      </div>
+      <div class="card pad24 col gap12">
+        <div class="row between"><h2>Balance</h2><span class="muted">${ic('wallet')}</span></div>
+        <div class="gtext-grape" style="font-family:var(--head);font-size:30px;font-weight:700">${money(S.fin.available,2)}</div>
+        <span class="small muted">${money(S.fin.pending,2)} pending in escrow</span>
+        <button class="btn" data-act="go" data-v="p-fin">Go to finances</button>
+      </div>
+      <div class="card pad24 col gap12">
+        <h2>Profile strength</h2>
+        <div class="dist"><div class="track" style="height:10px"><div style="width:80%"></div></div><b>80%</b></div>
+        <span class="small muted">Add 2 more portfolio projects with photos to reach 100%.</span>
+        <button class="btn sm" data-act="go" data-v="p-portfolio">Update portfolio</button>
+      </div>
+    </aside>
+  </div>`;
+}
+
+// Provider: job detail and bid form
+function vProviderJob(){
+  const j = job(S.param) || job(1042), c = cat(j.cat), cl = CLIENTS[j.client];
+  const bids = bidsFor(j.id);
+  const avg = bids.length ? bids.reduce((a,b)=>a+b.amount,0)/bids.length : 0;
+  const mine = S.bids.find(b=>b.job===j.id && b.provider===ME && b.status!=='withdrawn');
+  const F = S.ui.bidForm && S.ui.bidForm.job===j.id ? S.ui.bidForm : (S.ui.bidForm = {job:j.id, amount: mine?mine.amount:'', duration: mine?mine.duration:'2 hrs', description: mine?mine.description:'', service:'', editing:false});
+  const fee = 10;
+  return `
+  <button class="crumb" data-act="go" data-v="p-feed">${ic('chevL','sm')}Back to jobs</button>
+  <div class="row between wrap gap16" style="margin:6px 0 20px">
+    <div class="col gap4"><div class="row wrap gap12"><span class="muted b">#J-${j.id}</span>${statusPill(j.status)}${j.isInclusive?pill('Parts included','amber'):''}<span class="small muted">Posted ${j.posted}</span></div><h1>${j.sub} · ${j.property_type}</h1></div>
+    <button class="btn" data-act="saveJob" data-p="${j.id}">${ic('bookmark','sm')}${S.saved[j.id]?'Saved':'Save job'}</button>
+  </div>
+  <div class="split split380">
+    <section class="col gap16">
+      <div class="card pad24 col gap16">
+        <div class="grid g3" style="gap:10px">${j.images?Array.from({length:Math.min(j.images,3)}).map((_,i)=>ph('Job photo '+(i+1),130)).join(''):ph('No photos provided',130)}</div>
+        <div><span class="label">Problem statement</span><p style="margin:6px 0 0;font-size:15px">${esc(j.problem)}</p></div>
+        <div class="grid g3">
+          ${[['Category',`${c.category} › ${j.sub}`,'tag'],['Property type',j.property_type,'building'],['Preferred date',fmtDate(j.date),'calendar'],['Address',esc(j.address),'pin'],['Budget',`${money(j.min_price)} to ${money(j.price_max)}`,'dollar'],['Parts & materials',j.isInclusive?'Must be included':'Labor only OK','wrench']].map(([k,v,i])=>`<div class="row gap12" style="align-items:flex-start"><span class="caticon" style="width:36px;height:36px;border-radius:10px">${ic(i,'sm')}</span><div class="col"><span class="small muted">${k}</span><span class="b">${v}</span></div></div>`).join('')}
+        </div>
+      </div>
+      <div class="grid g3">
+        <div class="card pad"><span class="label">Bids so far</span><div class="stat"><div class="v">${bids.length}</div></div></div>
+        <div class="card pad"><span class="label">Average bid</span><div class="stat"><div class="v">${bids.length?money(avg):'-'}</div></div></div>
+        <div class="card pad"><span class="label">Distance</span><div class="stat"><div class="v">${j.dist}</div></div></div>
+      </div>
+      <div class="card pad24 col gap12">
+        <h2>About the client</h2>
+        <div class="row gap12"><div class="avatar av-sq" style="width:48px;height:48px;background:var(--amber-s);color:var(--amber)">${cl.name.split(' ').map(w=>w[0]).slice(0,2).join('')}</div><div class="col"><span class="b">${cl.name}</span><span class="small muted">${cl.business_type} · ${cl.location}</span></div></div>
+        <div class="grid g3" style="gap:10px">${[['Jobs posted',cl.jobs_posted],['Hire rate',cl.hire_rate+'%'],['Member since',cl.member]].map(([k,v])=>`<div class="card pad" style="background:var(--ground)"><span class="small muted">${k}</span><div class="b">${v}</div></div>`).join('')}</div>
+        <div class="small" style="padding:12px;border-radius:10px;background:var(--ground)">${stars(5,12)} <b>“Clear instructions and paid same day.”</b> <span class="muted">CoolFlow HVAC, Oct 2026</span></div>
+      </div>
+    </section>
+    <aside class="card pad24 col gap16" id="bidPanel">${bidPanel(j, mine, F, fee)}</aside>
+  </div>`;
+}
+function bidPanel(j, mine, F, fee){
+  if (mine && !F.editing) return `
+    <div class="banner ok">${ic('check')}Bid submitted ${mine.submitted}</div>
+    <div class="col">
+      ${[['Proposed amount',money(mine.amount)],['Duration',mine.duration],['Status',mine.app_status],['You receive',money(mine.amount*(1-fee/100),2)]].map(([k,v])=>`<div class="sum-row"><span class="muted">${k}</span><span class="b">${v}</span></div>`).join('')}
+    </div>
+    <div><span class="label">Your proposal</span><p style="margin:6px 0 0">${esc(mine.description)}</p></div>
+    <div class="row gap12"><button class="btn grow" data-act="editBid">${ic('edit','sm')}Edit bid</button><button class="btn danger" data-act="withdrawBid" data-p="${mine.id}">Withdraw</button></div>`;
+  const amt = +F.amount || 0;
+  const low = amt && amt < j.min_price;
+  return `
+    <div class="col gap4"><h2>${mine?'Edit your bid':'Place a bid'}</h2><span class="small muted">Client's range: ${money(j.min_price)} to ${money(j.price_max)}${j.isInclusive?' · parts included':''}</span></div>
+    <div class="field"><label for="bAmt">Proposed amount ($)</label><input id="bAmt" type="number" class="input" min="0" data-bind="ui.bidForm.amount" data-rerender="feeBox" value="${F.amount}" placeholder="${j.min_price}"></div>
+    <div id="feeBox">${feeBox(j, F, fee)}</div>
+    <div class="field"><label for="bDur">Estimated duration</label><select id="bDur" class="input" data-bind="ui.bidForm.duration">${['1 hr','2 hrs','3 hrs','Half day','1 day','2-3 days','1 week'].map(d=>`<option ${F.duration===d?'selected':''}>${d}</option>`).join('')}</select></div>
+    <div class="field"><label for="bSvc">Attach a service (optional)</label><select id="bSvc" class="input" data-bind="ui.bidForm.service"><option value="">None</option>${S.services.filter(s=>s.active).map(s=>`<option value="${s.id}" ${+F.service===s.id?'selected':''}>${esc(s.title)} · from ${money(s.price)}</option>`).join('')}</select></div>
+    <div class="field"><label for="bDesc">Proposal</label><textarea id="bDesc" class="input" data-bind="ui.bidForm.description" data-rerender="feeBox" placeholder="How will you do the job? When can you start? What's included?">${esc(F.description)}</textarea></div>
+    <div id="bidErr" class="warn"></div>
+    <button class="btn primary" data-act="submitBid" data-p="${j.id}">${ic('send','sm')}${mine?'Update bid':'Submit bid'}</button>
+    ${mine?`<button class="btn" data-act="cancelEdit">Cancel</button>`:''}`;
+}
+function strength(j, F){
+  const amt = +F.amount || 0, bids = bidsFor(j.id).filter(b=>b.provider!==ME);
+  const avg = bids.length ? bids.reduce((a,b)=>a+b.amount,0)/bids.length : j.price_max;
+  let sc = 0;
+  if (amt >= j.min_price && amt <= j.price_max) sc += 40; else if (amt) sc += 15;
+  if (amt && amt <= avg) sc += 20;
+  sc += Math.min(40, Math.round((F.description||'').trim().length / 3));
+  const [lab, g] = sc>=80?['Strong bid','var(--g-leaf)']:sc>=50?['Good bid','var(--g-sun)']:['Needs work','var(--g-coral)'];
+  const tipTxt = !amt?'Add your price to see how you compare.':amt<j.min_price?'Below the client\'s minimum, may look unrealistic.':amt>avg?`Avg bid is ${money(avg)}. Explain your extra value.`:(F.description||'').length<80?'Add more detail: timing, parts, warranty.':'Nice! Clear price and a detailed proposal.';
+  return `<div class="col gap4" style="margin-bottom:12px"><div class="row between small"><span class="b">Bid strength</span><span class="b">${lab}</span></div><div class="meter"><div style="width:${Math.max(6,sc)}%;background:${g}"></div></div><span class="hint">${tipTxt}</span></div>`;
+}
+function feeBox(j, F, fee){
+  const amt = +F.amount || 0;
+  const low = amt && amt < j.min_price;
+  return `${low?`<div class="warn" style="margin:-6px 0 8px">Below the client's minimum of ${money(j.min_price)}.</div>`:''}
+    ${strength(j, F)}
+    <div class="col small" style="padding:12px;border-radius:14px;background:var(--ground)">
+      <div class="sum-row"><span class="muted">Your bid</span><span class="b">${money(amt,2)}</span></div>
+      <div class="sum-row"><span class="muted">Service fee (${fee}%)</span><span class="b">-${money(amt*fee/100,2)}</span></div>
+      <div class="sum-row"><span class="b">You'll receive</span><span class="b" style="color:var(--primary-d)">${money(amt*(1-fee/100),2)}</span></div>
+    </div>`;
+}
+
+// Provider: my bids
+function myBidRows(){
+  const live = S.bids.filter(b=>b.provider===ME).map(b=>{ const j=job(b.job); return {id:b.id, live:true, jobId:j.id, title:j.sub, client:CLIENTS[j.client].name, amount:b.amount, status: b.status==='pending'?'active': b.status==='accepted'?'won': b.status, app_status:b.app_status, submitted:b.submitted}; });
+  return live.concat(S.pastBids.map(b=>({...b, live:false})));
+}
+function vProviderBids(){
+  const rows = myBidRows(), t = S.ui.bidsTab;
+  const cnt = s => rows.filter(r=>r.status===s).length;
+  const list = rows.filter(r=>r.status===t);
+  const total = rows.length, won = cnt('won');
+  const sPill = {active:pill('Active','green'), won:pill('Won','blue'), lost:pill('Lost','red'), withdrawn:pill('Withdrawn','gray')};
+  const aPill = s => s.startsWith('Hired')?pill(s,'green'):s==='Shortlisted'?pill(s,'amber'):s==='Completed'?pill(s,'blue'):s==='Not selected'?pill(s,'red'):s==='-'?'<span class="muted">-</span>':pill(s,'gray');
+  return `
+  <div class="row between wrap gap16" style="margin-bottom:20px"><h1>My bids</h1><button class="btn primary" data-act="go" data-v="p-feed">${ic('search','sm')}Find more jobs</button></div>
+  <div class="grid g4 stagger" style="margin-bottom:24px">
+    ${[['Bids placed',total,'var(--g-grape)','send'],['Active',cnt('active'),'var(--g-sun)','clock'],['Won',won,'var(--g-leaf)','award'],['Win rate',Math.round(won/Math.max(1,total)*100)+'%','var(--g-coral)','trending']].map(([l,v,g,i])=>`<div class="card pad stat" style="--bg:${g}"><div class="row between"><span class="label">${l}</span><span class="bub" style="background:${g}">${ic(i)}</span></div><div class="v">${v}</div></div>`).join('')}
+  </div>
+  <div style="margin-bottom:14px">${tabs([['active','Active',cnt('active')],['won','Won',cnt('won')],['lost','Lost',cnt('lost')],['withdrawn','Withdrawn',cnt('withdrawn')]], t, 'bidsTab')}</div>
+  <div class="card tablebox">
+    <table>
+      <thead><tr><th>Job</th><th>Client</th><th>Proposed</th><th>Bid status</th><th>Application</th><th>Submitted</th><th></th></tr></thead>
+      <tbody>
+      ${list.length? list.map(r=>`<tr>
+        <td><div class="col"><span class="b">${r.title}</span><span class="small muted">${r.jobId?'#J-'+r.jobId:'Contract'}</span></div></td>
+        <td>${r.client}</td><td class="b">${money(r.amount)}</td><td>${sPill[r.status]}</td><td>${aPill(r.app_status)}</td><td class="muted">${r.submitted}</td>
+        <td style="text-align:right;white-space:nowrap">${r.live && r.status==='active'?`<button class="btn sm" data-act="go" data-v="p-job" data-p="${r.jobId}">View</button> <button class="btn sm danger" data-act="withdrawBid" data-p="${r.id}">Withdraw</button>`: r.status==='won'?`<button class="btn sm" data-act="go" data-v="p-fin">Contract</button>`:''}</td>
+      </tr>`).join('') : `<tr><td colspan="7" class="muted" style="text-align:center;padding:32px">Nothing here.</td></tr>`}
+      </tbody>
+    </table>
+  </div>`;
+}
+
+// Provider: finances
+function vProviderFin(){
+  const F = S.fin, r = +S.ui.finRange;
+  const labels = S.earnings.labels.slice(-r), vals = S.earnings.values.slice(-r);
+  const max = Math.max(...vals), total = vals.reduce((a,b)=>a+b,0);
+  const tt = S.ui.txTab;
+  const tx = S.tx.filter(x => tt==='all' || (tt==='pay'&&x.type==='Payment') || (tt==='esc'&&x.type==='Escrow') || (tt==='wd'&&x.type==='Withdrawal'));
+  const stPill = s => s==='Paid'?pill(s,'green'):s==='Pending'?pill(s,'amber'):pill(s,'gray');
+  return `
+  <div class="row between wrap gap16" style="margin-bottom:20px"><h1>Finances</h1><div class="row gap12"><button class="btn">${ic('receipt','sm')}Tax documents</button><button class="btn primary" data-act="withdrawOpen">${ic('arrowUp')}Withdraw</button></div></div>
+  <div class="grid g3" style="margin-bottom:16px">
+    <div class="card pad24 stat" style="background:#1D1D1F;border-color:#1D1D1F;color:#fff"><span class="label" style="color:#A1A1A6">Available balance</span><div style="font-family:var(--head);font-size:36px;font-weight:700;margin:6px 0" data-count="${F.available}" data-pre="$" data-dec="2">${money(F.available,2)}</div><span class="small" style="color:#A1A1A6">Ready to withdraw to bank ••4821</span></div>
+    <div class="card pad24 stat" style="--bg:var(--g-sun)"><span class="label">Pending earnings</span><div class="stat"><div class="v" style="margin:6px 0">${money(F.pending,2)}</div></div><span class="small muted">2 contracts in escrow, released on completion</span></div>
+    <div class="card pad24 stat" style="--bg:var(--g-coral)"><span class="label">Taxes withheld (YTD)</span><div class="stat"><div class="v" style="margin:6px 0">${money(F.taxesYTD,2)}</div></div><span class="small muted">8% withholding on released payments</span></div>
+  </div>
+  <div class="grid g3" style="margin-bottom:24px">
+    ${[['Clients served',F.clients,'users','var(--g-sky)'],['Jobs done',F.jobs,'check','var(--g-leaf)'],['Active contracts',F.contracts,'file','var(--g-candy)']].map(([l,v,i,g])=>`<div class="card pad row gap12 stat" style="--bg:${g}"><span class="caticon" style="background:${g}">${ic(i)}</span><div class="col"><span class="small muted">${l}</span><span class="b" style="font-size:22px;font-family:var(--head)" data-count="${v}">${v}</span></div></div>`).join('')}
+  </div>
+  <div class="card pad24" style="margin-bottom:24px">
+    <div class="row between wrap gap12"><div class="col"><h2>Earnings</h2><span class="small muted">${money(total)} in the last ${r} months</span></div>${tabs([['6','6 months'],['12','12 months']], String(r), 'finRange')}</div>
+    <div class="bar-wrap" role="img" aria-label="Monthly earnings bar chart">
+      ${vals.map((v,i)=>`<div class="bar"><span class="v">${(v/1000).toFixed(1)}k</span><div class="fill ${i===vals.length-1?'cur':''}" style="height:${Math.round(v/max*170)}px;animation-delay:${i*45}ms" title="${labels[i]}: ${money(v)}"></div><span class="small muted">${labels[i]}</span></div>`).join('')}
+    </div>
+    <div class="row gap16 small muted" style="margin-top:8px"><span class="row"><span style="width:10px;height:10px;border-radius:3px;background:var(--primary)"></span>Released</span><span class="row"><span style="width:10px;height:10px;border-radius:3px;background:#FF9F0A"></span>Current month (to date)</span></div>
+  </div>
+  <div class="row between wrap gap12" style="margin-bottom:12px"><h2>Transactions</h2>${tabs([['all','All'],['pay','Payments'],['esc','Escrow'],['wd','Withdrawals']], tt, 'txTab')}</div>
+  <div class="card tablebox">
+    <table>
+      <thead><tr><th>Date & time</th><th>Type</th><th>Description</th><th>Contract</th><th style="text-align:right">Gross</th><th style="text-align:right">Taxes</th><th style="text-align:right">Net</th><th>Status</th></tr></thead>
+      <tbody>${tx.map(x=>`<tr><td class="muted" style="white-space:nowrap">${x.dt}</td><td>${x.type}</td><td>${esc(x.desc)}</td><td class="muted">${x.contract}</td><td style="text-align:right">${money(x.gross,2)}</td><td style="text-align:right" class="muted">${x.tax?'-'+money(x.tax,2):'-'}</td><td style="text-align:right" class="b">${money(x.gross-x.tax,2)}</td><td>${stPill(x.status)}</td></tr>`).join('')}</tbody>
+    </table>
+  </div>`;
+}
+function withdrawModal(){
+  modal(`
+    <div class="row between" style="margin-bottom:12px"><h2>Withdraw funds</h2><button class="iconbtn" aria-label="Close" data-act="closeModal">${ic('x')}</button></div>
+    <p class="muted" style="margin-top:0">Available: <b style="color:var(--ink)">${money(S.fin.available,2)}</b></p>
+    <div class="field"><label for="wdAmt">Amount ($)</label><input id="wdAmt" type="number" class="input" value="${S.fin.available.toFixed(2)}" min="1" step="0.01"></div>
+    <div class="field" style="margin-top:12px"><label for="wdTo">Send to</label><select id="wdTo" class="input"><option>Checking ••4821 · Arrives in 1-2 business days</option><option>Instant debit ••1190 · 1.5% fee</option></select></div>
+    <div id="wdErr" class="warn" style="margin-top:8px"></div>
+    <div class="row" style="justify-content:flex-end;margin-top:18px;gap:10px"><button class="btn" data-act="closeModal">Cancel</button><button class="btn primary" data-act="wdSubmit">Withdraw</button></div>`);
+}
+
+// Provider: reviews
+function vProviderReviews(){
+  const dist = {5:196,4:12,3:3,2:1,1:0}, total = 212;
+  const t = S.ui.revTab;
+  const list = S.reviews.filter(r => t==='all' || (t==='needs'&&!r.response) || (t==='5'&&r.stars===5) || (t==='low'&&r.stars<=3));
+  const needs = S.reviews.filter(r=>!r.response).length;
+  return `
+  <h1 style="margin-bottom:20px">Reviews</h1>
+  <div class="split-l split-rev">
+    <aside class="card pad24 col gap16">
+      <div class="col" style="align-items:flex-start"><span class="gtext" style="font-family:var(--head);font-size:56px;font-weight:700;line-height:1">4.9</span>${stars(5,18)}<span class="small muted" style="margin-top:4px">${total} reviews on completed jobs</span></div>
+      <div class="col gap4">${[5,4,3,2,1].map(n=>`<div class="dist"><span style="width:28px">${n}★</span><div class="track"><div style="width:${dist[n]/total*100}%"></div></div><span class="muted" style="width:30px;text-align:right">${dist[n]}</span></div>`).join('')}</div>
+      <div class="divider" style="margin:0"></div>
+      <div class="col gap12">${[['On time','4.8'],['Quality of work','4.9'],['Communication','4.9'],['Value for money','4.7']].map(([k,v])=>`<div class="row between"><span class="muted">${k}</span><span class="b">${v}</span></div>`).join('')}</div>
+      <div class="banner ok small">${ic('award')}Top-rated in Plumbing · Austin</div>
+    </aside>
+    <section class="col gap12">
+      ${tabs([['all','All',S.reviews.length],['needs','Needs response',needs],['5','5 stars'],['low','3 stars & below']], t, 'revTab')}
+      <div class="col gap12 stagger">${list.map(r=>`
+        <article class="card pad lift">
+          <div class="row between wrap gap12"><div class="row gap12"><div class="avatar" style="background:var(--gray-s);color:var(--gray)">${r.client.split(' ').map(w=>w[0]).slice(0,2).join('')}</div><div class="col"><span class="b">${esc(r.client)}</span><span class="small muted">${esc(r.job)} · ${r.date}</span></div></div>${stars(r.stars,16)}</div>
+          <p style="margin:12px 0">${esc(r.text)}</p>
+          ${r.response?`<div style="padding:12px 14px;border-radius:10px;background:var(--ground);border-left:0" class="small"><div class="b" style="margin-bottom:2px">Your response</div>${esc(r.response)}</div>`
+          : S.ui.replyOpen===r.id ? `<div class="col gap12"><textarea class="input" id="reply-${r.id}" placeholder="Thank the client or address their feedback..."></textarea><div class="row gap12"><button class="btn sm primary" data-act="replySave" data-p="${r.id}">Post response</button><button class="btn sm" data-act="replyCancel">Cancel</button></div></div>`
+          : `<button class="btn sm" data-act="replyOpen" data-p="${r.id}">${ic('message','sm')}Respond</button>`}
+        </article>`).join('') || emptyState('No reviews in this filter')}</div>
+    </section>
+  </div>`;
+}
+
+// Provider: services
+function vProviderServices(){
+  return `
+  <div class="row between wrap gap16" style="margin-bottom:20px"><div class="col gap4"><h1>Services</h1><span class="muted">What you offer clients. Active services appear on your public profile and can be attached to bids.</span></div><button class="btn primary" data-act="svcOpen">${ic('plus','sm')}Add service</button></div>
+  <div class="grid g3 stagger">
+    ${S.services.map(s=>{ const c=cat(s.cat); return `
+      <article class="card pad col gap12 lift" style="${s.active?'':'opacity:.65'}">
+        ${ph(s.title+' photo',140)}
+        <div class="row between gap12"><span class="small muted">${c.category}</span>${s.active?pill('Active','green'):pill('Hidden','gray')}</div>
+        <h3>${esc(s.title)}</h3>
+        <p class="small muted" style="margin:0;flex:1">${esc(s.description)}</p>
+        <div class="row between"><span class="b" style="font-size:16px">From ${money(s.price)}</span><span class="small muted row">${ic('clock','sm')}${s.duration}</span></div>
+        <div class="row gap12" style="border-top:1px solid var(--border);padding-top:12px">
+          <button class="switch ${s.active?'on':''}" role="switch" aria-checked="${s.active}" aria-label="Show ${esc(s.title)} on profile" data-act="svcToggle" data-p="${s.id}"></button><span class="small grow">Show on profile</span>
+          <button class="btn sm" data-act="svcOpen" data-p="${s.id}">${ic('edit','sm')}Edit</button>
+        </div>
+      </article>`;}).join('')}
+  </div>`;
+}
+function svcModal(id){
+  const s = id ? S.services.find(x=>x.id===+id) : {title:'',cat:1,description:'',price:'',duration:'1-2 hrs'};
+  modal(`
+    <div class="row between" style="margin-bottom:12px"><h2>${id?'Edit service':'Add a service'}</h2><button class="iconbtn" aria-label="Close" data-act="closeModal">${ic('x')}</button></div>
+    <div class="col gap12">
+      <div class="field"><label for="sTitle">Title</label><input id="sTitle" class="input" value="${esc(s.title)}" placeholder="e.g. Garbage disposal installation"></div>
+      <div class="field"><label for="sCat">Category</label><select id="sCat" class="input">${CATS.map(c=>`<option value="${c.id}" ${s.cat===c.id?'selected':''}>${c.category}</option>`).join('')}</select></div>
+      <div class="grid g2"><div class="field"><label for="sPrice">Starting price ($)</label><input id="sPrice" type="number" class="input" value="${s.price}"></div><div class="field"><label for="sDur">Duration</label><input id="sDur" class="input" value="${esc(s.duration)}"></div></div>
+      <div class="field"><label for="sDesc">Description</label><textarea id="sDesc" class="input">${esc(s.description)}</textarea></div>
+      <div class="field"><label>Images</label><div class="grid g3">${ph('Image 1',80)}${ph('Image 2',80)}<button class="ph" style="height:80px;cursor:pointer;color:var(--primary-d);border-color:var(--primary);background:var(--primary-s)">${ic('upload')}<span class="b">Upload</span></button></div></div>
+      <div id="sErr" class="warn"></div>
+    </div>
+    <div class="row" style="justify-content:space-between;margin-top:18px;gap:10px">${id?`<button class="btn danger" data-act="svcDelete" data-p="${id}">${ic('trash','sm')}Delete</button>`:'<span></span>'}<div class="row gap12"><button class="btn" data-act="closeModal">Cancel</button><button class="btn primary" data-act="svcSave" data-p="${id||''}">Save service</button></div></div>`);
+}
+
+// Provider: team & worksites
+function vProviderTeam(){
+  const f = S.ui.teamSite;
+  const members = S.team.filter(m => f==='all' || m.worksite===+f);
+  const site = id => S.worksites.find(w=>w.id===id);
+  return `
+  <div class="row between wrap gap16" style="margin-bottom:20px"><div class="col gap4"><h1>Team</h1><span class="muted">${S.team.filter(m=>m.is_active).length} active members across ${S.worksites.length} worksites</span></div><div class="row gap12"><button class="btn" data-act="siteOpen">${ic('building','sm')}Add worksite</button><button class="btn primary" data-act="memberOpen">${ic('plus','sm')}Add member</button></div></div>
+  <h2 style="margin-bottom:12px">Worksites</h2>
+  <div class="grid g3 stagger" style="margin-bottom:28px">
+    ${S.worksites.map(w=>{ const n=S.team.filter(m=>m.worksite===w.id).length; return `
+      <article class="card pad col gap12 lift" style="${f==w.id?'border-color:var(--primary);box-shadow:inset 0 0 0 1px var(--primary)':''}">
+        <div class="row between gap12"><div class="row gap12"><span class="caticon" style="width:42px;height:42px;background:${['var(--g-grape)','var(--g-sun)','var(--g-sky)','var(--g-leaf)'][(w.id-1)%4]}">${ic('building')}</span><div class="col"><span class="b">${w.name}</span><span class="small muted">${n} member${n!==1?'s':''}</span></div></div>${w.is_active?pill(w.status,'green'):pill(w.status,'amber')}</div>
+        <p class="small muted" style="margin:0">${esc(w.about)}</p>
+        <div class="col gap4 small"><span class="row">${ic('pin','sm')}${w.address}</span><span class="row">${ic('phone','sm')}${w.contact}</span></div>
+        <button class="btn sm" data-act="teamSite" data-v="${f==w.id?'all':w.id}">${f==w.id?'Show all members':'Filter team by this site'}</button>
+      </article>`;}).join('')}
+  </div>
+  <div class="row between wrap gap12" style="margin-bottom:12px"><h2>Members${f!=='all'?' · '+site(+f).name:''}</h2>${tabs([['all','All sites']].concat(S.worksites.map(w=>[String(w.id),w.name])), String(f), 'teamSite')}</div>
+  <div class="card tablebox">
+    <table>
+      <thead><tr><th>Name</th><th>Role</th><th>Contact</th><th>Date of birth</th><th>Address</th><th>Worksite</th><th>Active</th></tr></thead>
+      <tbody>${members.map(m=>`<tr style="${m.is_active?'':'color:var(--muted)'}">
+        <td><div class="row gap12"><div class="avatar" style="width:36px;height:36px;font-size:12px;background:${['var(--g-sun)','var(--g-grape)','var(--g-leaf)','var(--g-coral)','var(--g-sky)','var(--g-candy)'][m.id%6]};color:#fff">${m.emp_name.split(' ').map(w=>w[0]).join('')}</div><span class="b" style="white-space:nowrap">${esc(m.emp_name)}</span></div></td>
+        <td style="white-space:nowrap">${esc(m.role)}</td><td style="white-space:nowrap">${m.contact}</td><td style="white-space:nowrap">${dobFmt(m.dob)}</td><td>${esc(m.address)}</td><td style="white-space:nowrap">${site(m.worksite).name}</td>
+        <td><button class="switch ${m.is_active?'on':''}" role="switch" aria-checked="${m.is_active}" aria-label="${esc(m.emp_name)} active" data-act="memberToggle" data-p="${m.id}"></button></td>
+      </tr>`).join('')}</tbody>
+    </table>
+  </div>`;
+}
+function memberModal(){
+  modal(`
+    <div class="row between" style="margin-bottom:12px"><h2>Add team member</h2><button class="iconbtn" aria-label="Close" data-act="closeModal">${ic('x')}</button></div>
+    <div class="col gap12">
+      <div class="grid g2"><div class="field"><label for="mName">Full name</label><input id="mName" class="input"></div><div class="field"><label for="mRole">Role</label><input id="mRole" class="input" placeholder="e.g. Apprentice"></div></div>
+      <div class="grid g2"><div class="field"><label for="mContact">Contact</label><input id="mContact" class="input" placeholder="(512) 555-0100"></div><div class="field"><label for="mDob">Date of birth</label><input id="mDob" type="date" class="input"></div></div>
+      <div class="field"><label for="mAddr">Address</label><input id="mAddr" class="input"></div>
+      <div class="field"><label for="mSite">Worksite</label><select id="mSite" class="input">${S.worksites.map(w=>`<option value="${w.id}">${w.name}</option>`).join('')}</select></div>
+      <div id="mErr" class="warn"></div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:18px;gap:10px"><button class="btn" data-act="closeModal">Cancel</button><button class="btn primary" data-act="memberSave">Add member</button></div>`);
+}
+function siteModal(){
+  modal(`
+    <div class="row between" style="margin-bottom:12px"><h2>Add worksite</h2><button class="iconbtn" aria-label="Close" data-act="closeModal">${ic('x')}</button></div>
+    <div class="col gap12">
+      <div class="field"><label for="wName">Name</label><input id="wName" class="input"></div>
+      <div class="grid g2"><div class="field"><label for="wContact">Contact</label><input id="wContact" class="input"></div><div class="field"><label for="wStatus">Status</label><select id="wStatus" class="input"><option>Operational</option><option>Limited</option></select></div></div>
+      <div class="field"><label for="wAddr">Address</label><input id="wAddr" class="input"></div>
+      <div class="field"><label for="wAbout">About</label><textarea id="wAbout" class="input" style="min-height:80px"></textarea></div>
+      <div id="wErr" class="warn"></div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:18px;gap:10px"><button class="btn" data-act="closeModal">Cancel</button><button class="btn primary" data-act="siteSave">Add worksite</button></div>`);
+}
+
+// Provider: business portfolio
+function vProviderPortfolio(){
+  const tags = ['All','Commercial','Water heaters','Drains','Backflow'];
+  const t = S.ui.pfTag;
+  const list = S.portfolio.filter(p => t==='All' || p.tag===t);
+  const p = PROVIDERS[ME];
+  return `
+  <div class="row between wrap gap16" style="margin-bottom:20px"><div class="col gap4"><h1>Business portfolio</h1><span class="muted">This is what clients see when they open your profile from a bid.</span></div><div class="row gap12"><button class="btn" data-act="go" data-v="c-provider" data-p="p1">${ic('eye','sm')}Preview as client</button><button class="btn primary" data-act="pfAdd">${ic('plus','sm')}Add project</button></div></div>
+  <div class="card" style="overflow:hidden;margin-bottom:24px">
+    <div style="height:150px;background:linear-gradient(180deg,#FFF9DB,#F5F5F7);position:relative;overflow:hidden;display:flex;align-items:flex-end;justify-content:flex-end;padding:14px"><div style="position:absolute;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.25);left:-60px;top:-140px"></div><button class="btn sm" style="position:relative">${ic('upload','sm')}Change cover</button></div>
+    <div class="pad24 split-l">
+      <div class="col gap12">
+        <div class="row gap16">${avatar(p,72)}<div class="col"><div class="row gap12 wrap"><h2 style="font-size:24px">${p.name}</h2><span class="pill p-green">${ic('shield','sm')}Verified</span></div><span class="muted">${p.tagline}</span><span class="small">${stars(p.rating,13)} <b>${p.rating}</b> · ${p.reviews} reviews · ${p.jobs} jobs</span></div></div>
+        <div class="field"><label for="about">About your business</label><textarea id="about" class="input" style="min-height:96px">FlowRight Plumbing is a licensed plumbing contractor serving Austin and Williamson County since 2012. We focus on restaurants, clinics and multi-unit buildings, with crews dispatched from two yards so we can reach most of the metro within an hour.</textarea></div>
+        <div><button class="btn sm" data-act="saved">${ic('check','sm')}Save changes</button></div>
+      </div>
+      <div class="col gap12">
+        ${[['License no.','[YOUR LICENSE #]'],['Founded','2012'],['Service area','Austin, Round Rock, Cedar Park, Pflugerville'],['Worksites',S.worksites.filter(w=>w.is_active).map(w=>w.name).join(', ')],['Team',S.team.filter(m=>m.is_active).length+' active members'],['Insurance','General liability · $2M']].map(([k,v])=>`<div class="sum-row"><span class="muted">${k}</span><span class="b" style="text-align:right;max-width:60%">${v}</span></div>`).join('')}
+      </div>
+    </div>
+  </div>
+  <div class="row between wrap gap12" style="margin-bottom:14px"><h2>Projects (${S.portfolio.length})</h2>${tabs(tags.map(x=>[x,x]), t, 'pfTag')}</div>
+  <div class="grid g3 stagger">
+    ${list.map(x=>`
+      <article class="card pad col gap12 lift">
+        <div class="grid g2" style="gap:8px">${ph('Before',110)}${ph('After',110)}</div>
+        <div class="row between gap12"><span class="small muted">${x.tag} · ${x.date}</span>${x.featured?pill('Featured','amber'):''}</div>
+        <h3>${esc(x.title)}</h3>
+        <span class="small muted">${esc(x.client)}</span>
+        <p class="small" style="margin:0">${esc(x.note)}</p>
+        <div class="row between" style="border-top:1px solid var(--border);padding-top:12px">${stars(x.stars,14)}<div class="row gap12"><button class="switch ${x.featured?'on':''}" role="switch" aria-checked="${x.featured}" aria-label="Feature ${esc(x.title)}" data-act="pfFeature" data-p="${x.id}"></button><span class="small">Featured</span></div></div>
+      </article>`).join('')}
+  </div>`;
+}
+function pfModal(){
+  const done = S.pastBids.filter(b=>b.status==='won');
+  modal(`
+    <div class="row between" style="margin-bottom:12px"><h2>Add project</h2><button class="iconbtn" aria-label="Close" data-act="closeModal">${ic('x')}</button></div>
+    <div class="col gap12">
+      <div class="field"><label for="pfJob">From a completed job</label><select id="pfJob" class="input">${done.map(b=>`<option value="${b.id}">${b.title} · ${b.client}</option>`).join('')}</select></div>
+      <div class="field"><label for="pfTag">Category</label><select id="pfTagSel" class="input">${['Commercial','Water heaters','Drains','Backflow'].map(x=>`<option>${x}</option>`).join('')}</select></div>
+      <div class="field"><label for="pfNote">Short description</label><textarea id="pfNote" class="input" style="min-height:80px" placeholder="What was the challenge and what did you do?"></textarea></div>
+      <div class="field"><label>Photos</label><div class="grid g2">${ph('Before photo',90)}${ph('After photo',90)}</div></div>
+    </div>
+    <div class="row" style="justify-content:flex-end;margin-top:18px;gap:10px"><button class="btn" data-act="closeModal">Cancel</button><button class="btn primary" data-act="pfSave">Add to portfolio</button></div>`);
+}
+
+// Render and events
+const VIEWS = {'welcome':vWelcome,'c-jobs':vCustomerJobs,'c-post':vCustomerPost,'c-job':vCustomerJob,'c-provider':vCustomerProvider,
+  'p-feed':vProviderFeed,'p-job':vProviderJob,'p-bids':vProviderBids,'p-fin':vProviderFin,'p-reviews':vProviderReviews,'p-services':vProviderServices,'p-team':vProviderTeam,'p-portfolio':vProviderPortfolio};
+let prevView = null, history_ = [];
+let lastView = null;
+function render(){
+  if (S.view === 'welcome') $('#app').innerHTML = vWelcome();
+  else { const content = VIEWS[S.view](); $('#app').innerHTML = S.role==='customer' ? customerShell(content) : providerShell(content); }
+  const changed = lastView !== S.view; lastView = S.view;
+  const main = $('#app .c-main') || $('#app .p-main') || $('#app .welcome');
+  if (changed && main){ main.classList.add('enter'); runCounters(); setTimeout(() => main.classList.remove('enter'), 1300); }
+  document.title = BRAND.join('') + ' | ' + (S.role==='customer'?'Client':S.role==='provider'?'Provider':'Welcome');
+}
+
+
+const ACT = {
+  go:(v,p)=>{ history_.push([S.view,S.param]); if (v==='c-provider') S.ui.provTab='overview'; go(v, p && isNaN(p) ? p : (p?+p:null)); },
+  back:()=>{ const h = history_.pop(); h ? go(h[0],h[1]) : go('c-jobs'); },
+  cTab:v=>{S.ui.cTab=v;render();}, bidSort:v=>{S.ui.bidSort=v;render();}, provTab:v=>{S.ui.provTab=v;render();},
+  bidsTab:v=>{S.ui.bidsTab=v;render();}, finRange:v=>{S.ui.finRange=v;render();}, txTab:v=>{S.ui.txTab=v;render();},
+  revTab:v=>{S.ui.revTab=v;render();}, teamSite:v=>{S.ui.teamSite=v;render();}, pfTag:v=>{S.ui.pfTag=v;render();},
+  feedCat:v=>{S.ui.feedCat=v;render();}, feedIncl:()=>{S.ui.feedIncl=!S.ui.feedIncl;render();},
+  notify:()=>{ S.notifOpen=!S.notifOpen; render(); },
+  notifRead:()=>{ S.notifs[S.role].forEach(n=>n.unread=false); render(); },
+  closeChat:()=>{ S.chat.open=false; renderDrawer(); },
+  chatSend:()=>sendChat(),
+  chatQuick:v=>{ $('#chatIn').value=v; sendChat(); },
+  cmpToggle:(v,p,e)=>{ const id=+p; if(S.compare.includes(id)) S.compare=S.compare.filter(x=>x!==id); else { if(S.compare.length>=3){ e.target.checked=false; toast('Compare up to 3 bids'); return; } S.compare.push(id);} render(); },
+  cmpClear:()=>{ S.compare=[]; render(); },
+  cmpOpen:()=>compareModal(),
+  msg:(v,p)=>openChat(p),
+  saved:()=>toast('Profile saved'),
+  closeModal, closeModalBg:(v,p,e)=>{ if (e.target.classList.contains('overlay')) closeModal(); },
+
+  // customer
+  reviewOpen:(v,p)=>reviewModal(+p),
+  rvStar:v=>{ S.ui.rv.stars=+v; document.querySelectorAll('#starRow .starbtn').forEach((b,i)=>b.classList.toggle('on', i < +v)); },
+  rvSubmit:()=>{ const t=$('#rvText').value.trim(); if(!S.ui.rv.stars){$('#rvWarn').textContent='Pick a star rating.';return;} if(t.length<5){$('#rvWarn').textContent='Write a few words about the job.';return;}
+    job(S.ui.rv.id).review={stars:S.ui.rv.stars,text:t,response:''}; closeModal(); render(); toast('Review posted'); },
+  repost:(v,p)=>{ const j=job(p); const n=Math.max(...S.jobs.map(x=>x.id))+1; S.jobs.unshift({...j,id:n,status:'active',is_active:true,posted:'Just now',date:'2026-11-21',review:null}); S.ui.cTab='active'; render(); toast('Reposted as #J-'+n); },
+  cancelJob:(v,p)=>{ const j=job(p); j.status='canceled'; j.is_active=false; S.bids.filter(b=>b.job===j.id).forEach(b=>{b.is_active=false;}); render(); toast('Job canceled'); },
+  toggleAllBids:()=>{S.ui.showAllBids=!S.ui.showAllBids;render();},
+  shortlist:(v,p)=>{ S.ui.shortlist[p]=!S.ui.shortlist[p]; const b=S.bids.find(x=>x.id===+p); b.app_status=S.ui.shortlist[p]?'Shortlisted':'Under review'; render(); },
+  acceptBid:(v,p)=>{ const b=S.bids.find(x=>x.id===+p); S.bids.filter(x=>x.job===b.job).forEach(x=>{ if(x.id===b.id){x.is_won=true;x.status='accepted';x.app_status='Hired · In progress';} else if(x.status==='pending'){x.status='lost';x.app_status='Not selected';x.is_active=false;} });
+    job(b.job).is_active=false; S.compare=[]; closeModal(); render(); confetti(); toast('Hired '+PROVIDERS[b.provider].name); },
+  invite:()=>{S.ui.invited=true;render();toast('Invitation sent');},
+  // post job
+  pCat:v=>{const P=S.ui.post;P.cat=+v;P.sub=null;render();}, pSub:v=>{S.ui.post.sub=v;render();},
+  pProp:v=>{S.ui.post.property=v;render();}, pImg:()=>{S.ui.post.images++;render();},
+  pIncl:()=>{S.ui.post.inclusive=!S.ui.post.inclusive;render();},
+  pNext:()=>{S.ui.post.step++;render();}, pBack:()=>{S.ui.post.step--;render();}, pStep:v=>{S.ui.post.step=+v;render();},
+  pPost:()=>{ const P=S.ui.post; const n=Math.max(...S.jobs.map(x=>x.id))+1;
+    S.jobs.unshift({id:n, client:MY_CLIENT, cat:P.cat, sub:P.sub, min_price:+P.min, price_max:+P.max, address:P.address, property_type:P.property, problem:P.problem, date:P.date, images:P.images, status:'active', isInclusive:P.inclusive, is_active:true, posted:'Just now', dist:'2.4 mi'});
+    P.posted=n; render(); confetti(); },
+  postAnother:()=>{S.ui.post=newPost();render();},
+
+  // provider
+  saveJob:(v,p)=>{ S.saved[p]=!S.saved[p]; render(); toast(S.saved[p]?'Job saved':'Removed from saved'); },
+  submitBid:(v,p)=>{ const F=S.ui.bidForm, j=job(p); const amt=+F.amount;
+    if(!amt){$('#bidErr').textContent='Enter a proposed amount.';return;} if(F.description.trim().length<10){$('#bidErr').textContent='Add a short proposal (10+ characters).';return;}
+    const mine=S.bids.find(b=>b.job===j.id&&b.provider===ME&&b.status!=='withdrawn');
+    if(mine){ Object.assign(mine,{amount:amt,duration:F.duration,description:F.description.trim()}); F.editing=false; toast('Bid updated'); }
+    else { S.bids.push({id:Math.max(...S.bids.map(b=>b.id))+1, job:j.id, provider:ME, amount:amt, duration:F.duration, description:F.description.trim(), status:'pending', app_status:'Under review', is_active:true, is_won:false, submitted:'Nov 7, 2026'}); toast('Bid sent to '+CLIENTS[j.client].name); setTimeout(confetti,50); }
+    render(); },
+  editBid:()=>{S.ui.bidForm.editing=true;render();}, cancelEdit:()=>{S.ui.bidForm.editing=false;render();},
+  withdrawBid:(v,p)=>{ const b=S.bids.find(x=>x.id===+p); b.status='withdrawn'; b.is_active=false; b.app_status='-'; S.ui.bidForm=null; render(); toast('Bid withdrawn'); },
+  withdrawOpen:()=>withdrawModal(),
+  wdSubmit:()=>{ const a=+$('#wdAmt').value; if(!a||a<=0||a>S.fin.available){$('#wdErr').textContent='Enter an amount up to '+money(S.fin.available,2)+'.';return;}
+    S.fin.available=Math.round((S.fin.available-a)*100)/100; S.tx.unshift({dt:'2026-11-07 19:40',type:'Withdrawal',desc:'Transfer to bank ••4821',contract:'-',gross:-a,tax:0,status:'Processing'}); closeModal(); render(); toast(money(a,2)+' on its way to your bank'); },
+  replyOpen:(v,p)=>{S.ui.replyOpen=+p;render(); const t=$('#reply-'+p); t&&t.focus();}, replyCancel:()=>{S.ui.replyOpen=null;render();},
+  replySave:(v,p)=>{ const t=$('#reply-'+p).value.trim(); if(!t) return; S.reviews.find(r=>r.id===+p).response=t; S.ui.replyOpen=null; render(); toast('Response posted'); },
+  svcOpen:(v,p)=>svcModal(p), svcToggle:(v,p)=>{ const s=S.services.find(x=>x.id===+p); s.active=!s.active; render(); },
+  svcSave:(v,p)=>{ const d={title:$('#sTitle').value.trim(), cat:+$('#sCat').value, price:+$('#sPrice').value, duration:$('#sDur').value.trim()||'-', description:$('#sDesc').value.trim()};
+    if(!d.title||!d.price){$('#sErr').textContent='Title and price are required.';return;}
+    if(p){ Object.assign(S.services.find(x=>x.id===+p), d); } else S.services.unshift({id:Math.max(0,...S.services.map(s=>s.id))+1, active:true, ...d});
+    closeModal(); render(); toast('Service saved'); },
+  svcDelete:(v,p)=>{ S.services=S.services.filter(s=>s.id!==+p); closeModal(); render(); toast('Service deleted'); },
+  memberOpen:()=>memberModal(), memberToggle:(v,p)=>{ const m=S.team.find(x=>x.id===+p); m.is_active=!m.is_active; render(); },
+  memberSave:()=>{ const n=$('#mName').value.trim(), r=$('#mRole').value.trim(); if(!n||!r){$('#mErr').textContent='Name and role are required.';return;}
+    S.team.push({id:Math.max(...S.team.map(m=>m.id))+1, emp_name:n, role:r, contact:$('#mContact').value||'-', dob:$('#mDob').value||'2000-01-01', address:$('#mAddr').value||'-', worksite:+$('#mSite').value, is_active:true}); closeModal(); render(); toast(n+' added to the team'); },
+  siteOpen:()=>siteModal(),
+  siteSave:()=>{ const n=$('#wName').value.trim(); if(!n){$('#wErr').textContent='Name is required.';return;} const st=$('#wStatus').value;
+    S.worksites.push({id:Math.max(...S.worksites.map(w=>w.id))+1, name:n, contact:$('#wContact').value||'-', address:$('#wAddr').value||'-', about:$('#wAbout').value||'', is_active:st==='Operational', status:st}); closeModal(); render(); toast('Worksite added'); },
+  pfFeature:(v,p)=>{ const x=S.portfolio.find(i=>i.id===+p); x.featured=!x.featured; render(); },
+  pfAdd:()=>pfModal(),
+  pfSave:()=>{ const b=S.pastBids.find(x=>x.id===+$('#pfJob').value); S.portfolio.unshift({id:Math.max(...S.portfolio.map(x=>x.id))+1, title:b.title, client:b.client, tag:$('#pfTagSel').value, date:'Nov 2026', stars:5, featured:false, note:$('#pfNote').value.trim()||'Project details coming soon.'}); closeModal(); S.ui.pfTag='All'; render(); toast('Project added'); },
+};
+
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-act]'); if (!el || el.disabled) return;
+  const fn = ACT[el.dataset.act]; if (fn) fn(el.dataset.v, el.dataset.p, e);
+});
+document.addEventListener('keydown', e => { if (e.key==='Escape'){ if ($('#layer').innerHTML) closeModal(); else if (S.chat.open){ S.chat.open=false; renderDrawer(); } else if (S.notifOpen){ S.notifOpen=false; render(); } } if (e.key==='Enter' && e.target.id==='chatIn'){ e.preventDefault(); sendChat(); } });
+document.addEventListener('click', e => { if (S.notifOpen && !e.target.closest('.notif-wrap')){ S.notifOpen=false; render(); } }, true);
+
+// two-way binding without re-rendering the whole page (keeps focus while typing)
+const PARTIALS = {
+  summary:()=>{ const el=$('#summary'); if(el) el.innerHTML=postSummary(); const nb=$('[data-act="pNext"]'); if(nb){ const P=S.ui.post; nb.disabled=!(P.step===3?(P.date&&+P.min>0&&+P.max>=+P.min):true);} },
+  feedList:()=>{ $('#feedList').innerHTML=feedList(); },
+  feeBox:()=>{ const j=job(S.ui.bidForm.job); $('#feeBox').innerHTML=feeBox(j,S.ui.bidForm,10); },
+};
+function onBind(e){
+  const el = e.target; const path = el.dataset && el.dataset.bind; if (!path) return;
+  const [root, ...rest] = path.split('.');
+  let o = root==='post' ? S.ui.post : root==='ui' ? S.ui : S;
+  const keys = root==='post' ? rest : rest; const last = keys.pop();
+  keys.forEach(k => o = o[k]); o[last] = el.value;
+  if (root==='post'){ PARTIALS.summary(); const P=S.ui.post; const nb=$('[data-act="pNext"]'); if(nb && P.step===2) nb.disabled=!(P.problem.trim().length>9 && P.property && P.address.trim()); }
+  if (el.dataset.rerender && PARTIALS[el.dataset.rerender]) PARTIALS[el.dataset.rerender]();
+}
+document.addEventListener('input', onBind);
+document.addEventListener('change', onBind);
+
+// Welcome
+function vWelcome(){
+  return `<div class="welcome">
+    <div class="col stagger" style="position:relative;z-index:1;align-items:center;gap:4px">
+      <span class="welcome-icon">${LOGO_MARK}</span>
+      <span class="pill p-gray" style="font-size:13px;padding:5px 14px;margin:6px 0">Jobs and bidding marketplace</span>
+      <h1>Get it done.<br><span class="muted">Hire the right pro.</span></h1>
+      <p class="muted" style="font-size:19px;max-width:560px;margin:14px 0 0">Post a job, compare bids from local pros, and pay only when the work is done.</p>
+      <div class="role-grid">
+        <button class="role" data-act="go" data-v="c-jobs">
+          <span class="ico" style="background:var(--g-sun)">${ic('briefcase')}</span><h2>I need work done</h2><span class="muted">Post jobs, compare bids and hire trusted pros.</span><span class="go">Continue as client ${ic('chevR','sm')}</span>
+        </button>
+        <button class="role" data-act="go" data-v="p-feed">
+          <span class="ico" style="background:var(--g-sky)">${ic('award')}</span><h2>I'm a service pro</h2><span class="muted">Find jobs nearby, send bids and grow your business.</span><span class="go">Continue as provider ${ic('chevR','sm')}</span>
+        </button>
+      </div>
+      <div class="row wrap gap24" style="justify-content:center;margin-top:30px;color:var(--muted);font-size:13px">
+        <span class="row">${ic('shield','sm')}Verified pros</span><span class="row">${ic('wallet','sm')}Escrow payments</span><span class="row">${ic('star','sm')}Real reviews</span>
+      </div>
+    </div>
+  </div>`;
+}
+
+// Chat drawer
+const now = () => new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'});
+const REPLIES = ["Sure! I can be there at 7am before you open.","Yes, all parts are included in the price.","I'll bring photos of the finished work for your records.","Happy to adjust the time slot if that works better for you.","Great, I'll confirm once the booking is in."];
+function openChat(name){
+  S.chat.open = true; S.chat.with = name;
+  if (!S.chat.threads[name]) S.chat.threads[name] = [{from:'them', text:`Hi! Thanks for reaching out to ${name}. How can I help?`, tm:now()}];
+  renderDrawer(); setTimeout(()=>{ const i=$('#chatIn'); i&&i.focus(); }, 100);
+}
+function renderDrawer(){
+  const d = $('#drawer');
+  if (!S.chat.open){ d.innerHTML=''; return; }
+  const name = S.chat.with, th = S.chat.threads[name];
+  const ini = name.split(' ').map(w=>w[0]).slice(0,2).join('');
+  d.innerHTML = `<aside class="drawer" role="dialog" aria-label="Chat with ${esc(name)}">
+    <div class="drawer-h"><div class="avatar" style="background:var(--g-sky);color:#fff">${ini}</div><div class="col grow"><span class="b">${esc(name)}</span><span class="small" style="color:var(--green)">Online</span></div><button class="iconbtn" aria-label="Close chat" data-act="closeChat">${ic('x')}</button></div>
+    <div class="drawer-b" id="chatBody">
+      ${th.map(m=>`<div class="msg ${m.from}">${esc(m.text)}<span class="tm">${m.tm}</span></div>`).join('')}
+      ${S.chat.typing?'<div class="typing"><span></span><span></span><span></span></div>':''}
+    </div>
+    <div class="row wrap" style="gap:6px;padding:10px 12px 0">${['When can you start?','Are parts included?','Can you send photos?'].map(q=>`<button class="chip small" style="min-height:32px" data-act="chatQuick" data-v="${q}">${q}</button>`).join('')}</div>
+    <div class="drawer-f"><input id="chatIn" class="input" placeholder="Type a message..." aria-label="Message"><button class="btn primary" data-act="chatSend" aria-label="Send">${ic('send','sm')}</button></div>
+  </aside>`;
+  const b = $('#chatBody'); b.scrollTop = b.scrollHeight;
+}
+function sendChat(){
+  const inp = $('#chatIn'); const t = inp && inp.value.trim(); if (!t) return;
+  const th = S.chat.threads[S.chat.with]; th.push({from:'me', text:t, tm:now()}); renderDrawer();
+  setTimeout(()=>{ S.chat.typing = true; renderDrawer(); }, 350);
+  setTimeout(()=>{ S.chat.typing = false; th.push({from:'them', text:REPLIES[(th.length) % REPLIES.length], tm:now()}); renderDrawer(); }, 1700);
+}
+
+// Compare bids
+function compareModal(){
+  const bs = S.compare.map(id => { const b = S.bids.find(x=>x.id===id); return {...b, p:PROVIDERS[b.provider]}; });
+  const minAmt = Math.min(...bs.map(b=>b.amount)), maxRt = Math.max(...bs.map(b=>b.p.rating)), maxJobs = Math.max(...bs.map(b=>b.p.jobs));
+  const best = '<span class="pill p-green" style="margin-left:6px">Best</span>';
+  const rows = [
+    ['Price', b=>`<span class="b" style="font-size:18px">${money(b.amount)}</span>${b.amount===minAmt?best:''}`],
+    ['Rating', b=>`${stars(b.p.rating,13)} <b>${b.p.rating.toFixed(1)}</b>${b.p.rating===maxRt?best:''}`],
+    ['Reviews', b=>b.p.reviews],
+    ['Jobs done', b=>`${b.p.jobs}${b.p.jobs===maxJobs?best:''}`],
+    ['Duration', b=>b.duration],
+    ['Replies', b=>b.p.response],
+    ['Verified', b=>b.p.verified?`<span class="pill p-green">${ic('shield','sm')}Yes</span>`:'<span class="muted">No</span>'],
+  ];
+  $('#layer').innerHTML = `<div class="overlay" data-act="closeModalBg"><div class="modal wide" role="dialog" aria-modal="true">
+    <div class="row between" style="margin-bottom:16px"><h2>Compare bids</h2><button class="iconbtn" aria-label="Close" data-act="closeModal">${ic('x')}</button></div>
+    <div class="tablebox"><table>
+      <thead><tr><th></th>${bs.map(b=>`<th style="text-transform:none;letter-spacing:0"><div class="row gap12">${avatar(b.p,36)}<span class="b" style="color:var(--ink);font-size:14px">${b.p.name}</span></div></th>`).join('')}</tr></thead>
+      <tbody>${rows.map(([l,f])=>`<tr><td class="muted b">${l}</td>${bs.map(b=>`<td>${f(b)}</td>`).join('')}</tr>`).join('')}
+      <tr><td></td>${bs.map(b=>`<td><button class="btn sm primary" data-act="acceptBid" data-p="${b.id}">Hire</button></td>`).join('')}</tr></tbody>
+    </table></div></div></div>`;
+}
+
+// Motion helpers
+const reduced = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+function confetti(){
+  if (reduced()) return;
+  const colors = ['#FFD23F','#FF8A3D','#8B5CF6','#10B981','#FF6A88','#60A5FA'];
+  for (let i=0;i<90;i++){
+    const c = document.createElement('div'); c.className='confetti';
+    c.style.left = Math.random()*100+'vw'; c.style.background = colors[i%colors.length];
+    c.style.setProperty('--x', (Math.random()*300-150)+'px'); c.style.setProperty('--r', (Math.random()*900+180)+'deg');
+    c.style.setProperty('--d', (Math.random()*1.4+1.8)+'s'); c.style.animationDelay = (Math.random()*0.4)+'s';
+    if (i%3===0){ c.style.borderRadius='50%'; c.style.width='9px'; c.style.height='9px'; }
+    document.body.appendChild(c); setTimeout(()=>c.remove(), 3800);
+  }
+}
+function runCounters(){
+  if (reduced()) return;
+  document.querySelectorAll('[data-count]').forEach(el => {
+    const to = parseFloat(el.dataset.count), pre = el.dataset.pre||'', dec = +(el.dataset.dec||0);
+    if (isNaN(to)) return;
+    const t0 = performance.now(), dur = 1000;
+    const step = t => { const k = Math.min(1,(t-t0)/dur), e = 1-Math.pow(1-k,3);
+      el.textContent = pre + (to*e).toLocaleString('en-US',{minimumFractionDigits:dec, maximumFractionDigits:dec});
+      if (k<1) requestAnimationFrame(step); };
+    requestAnimationFrame(step);
+  });
+}
+
+render();
+
+(() => {
+  const intro = document.getElementById('intro'); if (!intro) return;
+  const done = () => { if (intro.isConnected) intro.remove(); };
+  intro.addEventListener('click', done);
+  intro.addEventListener('animationend', e => { if (e.animationName === 'introOut') done(); });
+  setTimeout(done, reduced() ? 1200 : 3400);
+})();
+</script>
+</body>
+</html>
